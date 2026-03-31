@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-const mapUrl = 'https://www.google.com/maps/d/embed?mid=1xdpRbdo5OWIAp8XpLsEbszotEqB1Hw0'
+const mapUrl = 'https://www.google.com/maps/d/embed?mid=1Dz434-txDg-1hLHDC7vnuVMrJMy6gJY'
 const sharedMapUrl =
-  'https://www.google.com/maps/d/u/0/edit?mid=1xdpRbdo5OWIAp8XpLsEbszotEqB1Hw0&usp=sharing'
+  'https://www.google.com/maps/d/edit?mid=1Dz434-txDg-1hLHDC7vnuVMrJMy6gJY&usp=sharing'
 
 export default function QuartierPage() {
   return (
