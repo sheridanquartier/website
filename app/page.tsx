@@ -327,6 +327,16 @@ export default async function HomePage() {
               <div className="space-y-4">
                 {secondaryPosts.map((post) => (
                   <Link key={post.id} href={`/neuigkeiten/${post.slug}`} className="block rounded-[28px] border border-[var(--line)] bg-white/72 px-5 py-5 shadow-[0_18px_44px_rgba(38,82,62,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c56842]/28">
+                    {post.image_url && (
+                      <div className="relative mb-4 h-[150px] w-full overflow-hidden rounded-[20px] bg-[#f5f5f7]">
+                        <Image
+                          src={post.image_url}
+                          alt={post.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
                     <div className="mb-3 flex flex-wrap items-center gap-2">
                       <CommunityBadge community={post.community} size="sm" />
                       <span className="text-[12px] uppercase tracking-[0.08em] text-[#8b7b6c]">
