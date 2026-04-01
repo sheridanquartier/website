@@ -66,7 +66,7 @@ export default async function HomePage() {
 
   const { data: blogPosts } = await supabase
     .from('blog_posts')
-    .select('id, title, slug, excerpt, published_at, community')
+    .select('id, title, slug, excerpt, image_url, published_at, community')
     .eq('published', true)
     .order('published_at', { ascending: false })
     .limit(3)
@@ -297,18 +297,30 @@ export default async function HomePage() {
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)]">
               {featuredPost && (
-                <Link href={`/neuigkeiten/${featuredPost.slug}`} className="editorial-panel block p-6 md:p-8">
-                  <div className="mb-4 flex flex-wrap items-center gap-2">
-                    <CommunityBadge community={featuredPost.community} size="sm" />
-                    <span className="text-[12px] uppercase tracking-[0.08em] text-[#8b7b6c]">
-                      {formatDate(featuredPost.published_at)}
-                    </span>
-                  </div>
-                  <h3 className="mb-4 text-[36px] md:text-[44px] leading-[0.98]">{featuredPost.title}</h3>
-                  {featuredPost.excerpt && (
-                    <p className="max-w-[52ch] text-[17px] leading-[1.8] text-[#665f56]">{featuredPost.excerpt}</p>
+                <Link href={`/neuigkeiten/${featuredPost.slug}`} className="editorial-panel block overflow-hidden">
+                  {featuredPost.image_url && (
+                    <div className="relative h-[220px] w-full bg-[#f5f5f7] md:h-[360px]">
+                      <Image
+                        src={featuredPost.image_url}
+                        alt={featuredPost.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
                   )}
-                  <div className="mt-8 subtle-link">Beitrag lesen</div>
+                  <div className="p-6 md:p-8">
+                    <div className="mb-4 flex flex-wrap items-center gap-2">
+                      <CommunityBadge community={featuredPost.community} size="sm" />
+                      <span className="text-[12px] uppercase tracking-[0.08em] text-[#8b7b6c]">
+                        {formatDate(featuredPost.published_at)}
+                      </span>
+                    </div>
+                    <h3 className="mb-4 text-[36px] md:text-[44px] leading-[0.98]">{featuredPost.title}</h3>
+                    {featuredPost.excerpt && (
+                      <p className="max-w-[52ch] text-[17px] leading-[1.8] text-[#665f56]">{featuredPost.excerpt}</p>
+                    )}
+                    <div className="mt-8 subtle-link">Beitrag lesen</div>
+                  </div>
                 </Link>
               )}
 
