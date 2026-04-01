@@ -84,6 +84,16 @@ export default async function NeuigkeitenPage() {
                 {remainingPosts.map((post) => (
                   <Link key={post.id} href={`/neuigkeiten/${post.slug}`} className="block">
                     <article className="card group cursor-pointer">
+                      {post.image_url && (
+                        <div className="relative mb-5 h-[180px] w-full overflow-hidden rounded-[22px] bg-[#f5f5f7]">
+                          <Image
+                            src={post.image_url}
+                            alt={post.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
                       <div className="mb-3 flex items-center gap-3">
                         <CommunityBadge community={post.community} size="sm" />
                         <span className="text-[13px] text-[#6e6e73]">{formatDateLong(post.published_at)}</span>
