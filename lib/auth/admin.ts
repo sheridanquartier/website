@@ -12,10 +12,8 @@ export interface AdminAccess {
 
 export function getAdminAccess(user: User | null): AdminAccess {
   const appMeta = user?.app_metadata ?? {}
-  const userMeta = user?.user_metadata ?? {}
-
-  const role = (appMeta.role || userMeta.role || null) as AdminRole | null
-  const community = (appMeta.community || userMeta.community || null) as CommunityId | null
+  const role = (appMeta.role || null) as AdminRole | null
+  const community = (appMeta.community || null) as CommunityId | null
 
   if (role === 'superadmin') {
     return {

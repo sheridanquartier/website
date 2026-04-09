@@ -23,6 +23,7 @@ export async function middleware(request: NextRequest) {
       // Cookie ist ungültig oder abgelaufen
       const response = NextResponse.redirect(new URL('/login', request.url))
       response.cookies.delete('quartier_session')
+      response.cookies.delete('quartier_owner')
       return response
     }
 

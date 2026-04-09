@@ -48,6 +48,8 @@ export default function SchwarzesBrettPage() {
   const [typeFilter, setTypeFilter] = useState<string>('alle')
   const [communityFilter, setCommunityFilter] = useState<string>('alle')
   const [imageFile, setImageFile] = useState<File | null>(null)
+  const [formError, setFormError] = useState('')
+  const [formSuccess, setFormSuccess] = useState('')
   const [formData, setFormData] = useState<PostFormData>({
     title: '',
     description: '',
@@ -97,6 +99,8 @@ export default function SchwarzesBrettPage() {
     })
     setImageFile(null)
     setEditingPost(null)
+    setFormError('')
+    setFormSuccess('')
   }
 
   const fetchPosts = useCallback(async () => {
@@ -161,6 +165,8 @@ export default function SchwarzesBrettPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setFormError('')
+    setFormSuccess('')
 
     try {
       let imageUrl: string | null = editingPost?.image_url || null
@@ -196,7 +202,7 @@ export default function SchwarzesBrettPage() {
 
       if (!response.ok) {
         const data = await response.json()
-        alert(data.error || 'Fehler beim Speichern des Eintrags')
+        setFormError(data.error || 'Fehler beim Speichern des Eintrags')
         return
       }
 
@@ -206,11 +212,12 @@ export default function SchwarzesBrettPage() {
       }
 
       resetForm()
+      setFormSuccess(editingPost ? 'Eintrag wurde aktualisiert.' : 'Eintrag wurde erstellt.')
       setIsModalOpen(false)
       fetchPosts()
     } catch (error) {
       console.error('Error:', error)
-      alert('Fehler beim Speichern des Eintrags')
+      setFormError('Fehler beim Speichern des Eintrags')
     }
   }
 
@@ -268,8 +275,16 @@ export default function SchwarzesBrettPage() {
           <div className="text-center py-12"><p className="text-gray-500">Lädt...</p></div>
         ) : posts.length === 0 ? (
           <div className="card text-center py-12">
-            <p className="text-gray-500">Keine Einträge gefunden</p>
-            <p className="text-sm text-gray-400 mt-2">Seien Sie der Erste und erstellen Sie einen Eintrag!</p>
+            <p className="text-gray-700">Für diese Auswahl gibt es aktuell keine Einträge.</p>
+            <p className="text-sm text-gray-500 mt-2">Sie können die Filter zurücksetzen oder direkt einen neuen Eintrag erstellen.</p>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <button onClick={() => { setTypeFilter('alle'); setCommunityFilter('alle') }} className="btn-secondary">
+                Filter zurücksetzen
+              </button>
+              <button onClick={openCreateModal} className="btn-primary">
+                Ersten Eintrag erstellen
+              </button>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -314,9 +329,16 @@ export default function SchwarzesBrettPage() {
           size="lg"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
+            {formError && (
+              <div className="rounded-2xl border border-[#ff3b30] bg-[#ff3b30]/10 px-4 py-3 text-[14px] text-[#b42318]">
+                {formError}
+              </div>
+            )}
+
             <div>
               <label className="block text-sm font-medium mb-2">Titel *</label>
               <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className="input" required />
+              <p className="mt-2 text-[13px] text-[var(--muted)]">Beschreiben Sie kurz und konkret, worum es geht.</p>
             </div>
 
             <div>
@@ -402,6 +424,12 @@ export default function SchwarzesBrettPage() {
             </div>
           </form>
         </Modal>
+
+        {formSuccess && (
+          <div className="fixed bottom-6 right-6 z-50 rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-[14px] text-[var(--ink)] shadow-[0_16px_36px_rgba(38,82,62,0.12)]">
+            {formSuccess}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
 import { getInternalOwner, getInternalSession } from '@/lib/auth/internal'
+import { validateTradePayload } from '@/lib/security/internalContent'
 
 async function assertOwnership(id: string) {
   const session = await getInternalSession()
@@ -34,21 +35,14 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     return access.error
   }
 
-  const body = await request.json()
+  const body = validateTradePayload(await request.json())
+  if (!body.success) {
+    return NextResponse.json({ error: body.error }, { status: 400 })
+  }
+
   const { error } = await access.supabase
     .from('trades')
-    .update({
-      title: body.title,
-      description: body.description,
-      type: body.type,
-      offer: body.offer ?? null,
-      seek: body.seek ?? null,
-      image_url: body.image_url ?? null,
-      community: body.community,
-      contact_name: body.contact_name,
-      contact_info: body.contact_info,
-      expires_at: body.expires_at,
-    })
+    .update(body.data)
     .eq('id', params.id)
 
   if (error) {

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
 import { getInternalOwner, getInternalSession } from '@/lib/auth/internal'
+import { validatePostPayload } from '@/lib/security/internalContent'
 
 export async function POST(request: NextRequest) {
   const session = await getInternalSession()
@@ -10,23 +11,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Nicht autorisiert' }, { status: 401 })
   }
 
-  const body = await request.json()
+  const body = validatePostPayload(await request.json())
+  if (!body.success) {
+    return NextResponse.json({ error: body.error }, { status: 400 })
+  }
+
   const supabase = createAdminClient()
 
   const { data, error } = await supabase
     .from('posts')
     .insert({
-      title: body.title,
-      description: body.description,
-      type: body.type,
-      category: body.category,
-      offer: body.offer ?? null,
-      seek: body.seek ?? null,
-      community: body.community,
-      contact_name: body.contact_name,
-      contact_info: body.contact_info,
-      expires_at: body.expires_at,
-      image_url: body.image_url ?? null,
+      ...body.data,
       creator_session_id: ownerId,
     })
     .select('id')

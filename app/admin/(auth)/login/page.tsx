@@ -36,16 +36,20 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-warm-white">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Admin-Bereich</h1>
-          <p className="text-gray-600">
-            Melden Sie sich mit Ihrem Admin-Benutzernamen an
-          </p>
-        </div>
+    <div className="min-h-screen px-4 pt-20 pb-12 bg-warm-white">
+      <div className="container-custom max-w-5xl">
+        <div className="section-shell">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <span className="eyebrow mb-5">Projektverwaltung</span>
+              <h1 className="max-w-[9ch]">Admin-Bereich</h1>
+              <p className="max-w-[44ch] text-[17px] leading-[1.8] text-[var(--muted)]">
+                Zugang für Community-Admins und Superadmin. Bitte melden Sie sich mit Ihrem
+                Admin-Benutzernamen an, nicht mit dem normalen Bewohnerzugang.
+              </p>
+            </div>
 
-        <div className="card">
+            <div className="card">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="username" className="block text-sm font-medium mb-2">
@@ -94,6 +98,8 @@ export default function AdminLoginPage() {
               {loading ? 'Wird angemeldet...' : 'Anmelden'}
             </button>
           </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/server'
 import { getInternalOwner, getInternalSession } from '@/lib/auth/internal'
+import { validatePostPayload } from '@/lib/security/internalContent'
 
 async function assertOwnership(id: string) {
   const session = await getInternalSession()
@@ -34,22 +35,14 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     return access.error
   }
 
-  const body = await request.json()
+  const body = validatePostPayload(await request.json())
+  if (!body.success) {
+    return NextResponse.json({ error: body.error }, { status: 400 })
+  }
+
   const { error } = await access.supabase
     .from('posts')
-    .update({
-      title: body.title,
-      description: body.description,
-      type: body.type,
-      category: body.category,
-      offer: body.offer ?? null,
-      seek: body.seek ?? null,
-      community: body.community,
-      contact_name: body.contact_name,
-      contact_info: body.contact_info,
-      expires_at: body.expires_at,
-      image_url: body.image_url ?? null,
-    })
+    .update(body.data)
     .eq('id', params.id)
 
   if (error) {

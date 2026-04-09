@@ -33,6 +33,8 @@ export default function SkillsPage() {
   const [editingSkill, setEditingSkill] = useState<Skill | null>(null)
   const [communityFilter, setCommunityFilter] = useState<string>('alle')
   const [imageFile, setImageFile] = useState<File | null>(null)
+  const [formError, setFormError] = useState('')
+  const [formSuccess, setFormSuccess] = useState('')
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -109,6 +111,8 @@ export default function SkillsPage() {
     })
     setImageFile(null)
     setEditingSkill(null)
+    setFormError('')
+    setFormSuccess('')
   }
 
   const openEditModal = (skill: Skill) => {
@@ -135,6 +139,8 @@ export default function SkillsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setFormError('')
+    setFormSuccess('')
 
     try {
       let imageUrl: string | null = editingSkill?.image_url || null
@@ -169,7 +175,7 @@ export default function SkillsPage() {
 
       if (!response.ok) {
         const data = await response.json()
-        alert(data.error || 'Fehler beim Speichern des Eintrags')
+        setFormError(data.error || 'Fehler beim Speichern des Eintrags')
         return
       }
 
@@ -179,11 +185,12 @@ export default function SkillsPage() {
       }
 
       resetForm()
+      setFormSuccess(editingSkill ? 'Skill wurde aktualisiert.' : 'Skill wurde erstellt.')
       setIsModalOpen(false)
       fetchSkills()
     } catch (error) {
       console.error('Unexpected error:', error)
-      alert('Ein unerwarteter Fehler ist aufgetreten')
+      setFormError('Ein unerwarteter Fehler ist aufgetreten')
     }
   }
 
@@ -227,7 +234,18 @@ export default function SkillsPage() {
         {loading ? (
           <div className="text-center py-12"><p className="text-gray-500">Lädt...</p></div>
         ) : skills.length === 0 ? (
-          <div className="card text-center py-12"><p className="text-gray-500">Keine Einträge gefunden</p></div>
+          <div className="card text-center py-12">
+            <p className="text-gray-700">Für diese Auswahl gibt es aktuell keine Skills.</p>
+            <p className="mt-2 text-sm text-gray-500">Erstellen Sie einen neuen Eintrag oder zeigen Sie wieder alle Gemeinschaften an.</p>
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <button onClick={() => setCommunityFilter('alle')} className="btn-secondary">
+                Filter zurücksetzen
+              </button>
+              <button onClick={() => { resetForm(); setIsModalOpen(true) }} className="btn-primary">
+                Ersten Skill erstellen
+              </button>
+            </div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skill) => (
@@ -267,9 +285,15 @@ export default function SkillsPage() {
           size="lg"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
+            {formError && (
+              <div className="rounded-2xl border border-[#ff3b30] bg-[#ff3b30]/10 px-4 py-3 text-[14px] text-[#b42318]">
+                {formError}
+              </div>
+            )}
             <div>
               <label className="block text-sm font-medium mb-2">Titel *</label>
               <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className="input" required />
+              <p className="mt-2 text-[13px] text-[var(--muted)]">Formulieren Sie kurz, welche Fähigkeit Sie anbieten oder suchen.</p>
             </div>
             <div>
               <label className="block text-sm font-medium mb-2">Beschreibung *</label>
@@ -342,6 +366,12 @@ export default function SkillsPage() {
             </div>
           </form>
         </Modal>
+
+        {formSuccess && (
+          <div className="fixed bottom-6 right-6 z-50 rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-[14px] text-[var(--ink)] shadow-[0_16px_36px_rgba(38,82,62,0.12)]">
+            {formSuccess}
+          </div>
+        )}
       </div>
     </div>
   )
