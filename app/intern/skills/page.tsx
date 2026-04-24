@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import TradeCard from '@/components/TradeCard'
 import Modal from '@/components/Modal'
 import ImageUpload from '@/components/ImageUpload'
-import { uploadImage } from '@/lib/utils/imageUpload'
+import { uploadInternalImage } from '@/lib/utils/imageUpload'
 import { COMMUNITIES, type CommunityId } from '@/lib/constants'
 
 interface Skill {
@@ -145,7 +145,7 @@ export default function SkillsPage() {
     try {
       let imageUrl: string | null = editingSkill?.image_url || null
       if (imageFile) {
-        imageUrl = await uploadImage(imageFile)
+        imageUrl = await uploadInternalImage(imageFile)
       }
 
       const expiresAt = new Date()
@@ -190,7 +190,7 @@ export default function SkillsPage() {
       fetchSkills()
     } catch (error) {
       console.error('Unexpected error:', error)
-      setFormError('Ein unerwarteter Fehler ist aufgetreten')
+      setFormError(error instanceof Error ? error.message : 'Ein unerwarteter Fehler ist aufgetreten')
     }
   }
 

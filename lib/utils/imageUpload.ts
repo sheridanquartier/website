@@ -37,6 +37,30 @@ export async function uploadImage(
   return publicUrl
 }
 
+export async function uploadInternalImage(file: File): Promise<string> {
+  const formData = new FormData()
+  formData.append('file', file)
+
+  const response = await fetch('/api/intern/upload-image', {
+    method: 'POST',
+    body: formData,
+  })
+
+  let payload: { error?: string; publicUrl?: string } | null = null
+
+  try {
+    payload = await response.json()
+  } catch {
+    payload = null
+  }
+
+  if (!response.ok || !payload?.publicUrl) {
+    throw new Error(payload?.error || 'Upload fehlgeschlagen')
+  }
+
+  return payload.publicUrl
+}
+
 /**
  * Löscht ein Bild aus Supabase Storage
  * @param url Die URL des zu löschenden Bildes

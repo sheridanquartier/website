@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import PostCard from '@/components/PostCard'
 import Modal from '@/components/Modal'
 import ImageUpload from '@/components/ImageUpload'
-import { uploadImage } from '@/lib/utils/imageUpload'
+import { uploadInternalImage } from '@/lib/utils/imageUpload'
 import { COMMUNITIES, CATEGORIES, type CommunityId } from '@/lib/constants'
 
 interface Post {
@@ -171,7 +171,7 @@ export default function SchwarzesBrettPage() {
     try {
       let imageUrl: string | null = editingPost?.image_url || null
       if (imageFile) {
-        imageUrl = await uploadImage(imageFile)
+        imageUrl = await uploadInternalImage(imageFile)
       }
 
       const expiresAt = new Date()
@@ -217,7 +217,7 @@ export default function SchwarzesBrettPage() {
       fetchPosts()
     } catch (error) {
       console.error('Error:', error)
-      setFormError('Fehler beim Speichern des Eintrags')
+      setFormError(error instanceof Error ? error.message : 'Fehler beim Speichern des Eintrags')
     }
   }
 
