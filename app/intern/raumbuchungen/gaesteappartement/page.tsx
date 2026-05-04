@@ -117,7 +117,7 @@ export default function GaesteappartementPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="card">
                 <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-[48px] font-semibold text-[#1d1d1f]">30 €</span>
+                  <span className="text-[48px] font-semibold text-[#1d1d1f]">20 €</span>
                   <span className="text-[21px] text-[#6e6e73]">pro Nacht</span>
                 </div>
               </div>

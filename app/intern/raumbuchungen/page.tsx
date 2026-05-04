@@ -62,7 +62,7 @@ const bookableRooms = [
     community: 'Sheridan Park & Junia',
     name: 'Gästeappartement',
     description: 'Gemütliches Appartement mit Schlafsofa und Hochbett für bis zu 4 Personen. Ausgestattet mit Bad und WLAN.',
-    price: '30 €/Nacht',
+    price: '20 €/Nacht',
     link: '/intern/raumbuchungen/gaesteappartement',
     colorClass: 'border-[#2563EB]'
   },
