@@ -231,7 +231,7 @@ export default function MobileHome({ posts, isLoggedIn }: MobileHomeProps) {
           Organisieren, teilen, füreinander da sein.
         </h2>
         <p className="mb-5 text-[14px] leading-[1.65] text-white/[0.72]">
-          Schwarzes Brett, Kalender, Verleihpool und Räume liegen im internen Bereich direkt beieinander.
+          Gemeinschaftsflächen, Termine, Schwarzes Brett, Verleihpool und Skillpool liegen im internen Bereich direkt beieinander.
         </p>
         <Link href={internalHref} className="flex min-h-[50px] items-center justify-between rounded-[18px] bg-white px-4 text-[14px] font-bold text-[#183f36]">
           <span>{isLoggedIn ? 'Mein Quartier öffnen' : 'Intern anmelden'}</span>

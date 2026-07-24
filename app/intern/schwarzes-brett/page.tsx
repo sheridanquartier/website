@@ -296,7 +296,7 @@ export default function SchwarzesBrettPage() {
             description="Für diese Auswahl ist gerade nichts aktiv. Sie können die Filter zurücksetzen oder direkt selbst etwas einstellen."
             secondaryLabel="Filter zurücksetzen"
             onSecondary={() => { setTypeFilter('alle'); setCommunityFilter('alle') }}
-            primaryLabel="Ersten Eintrag erstellen"
+            primaryLabel="Suchen, anbieten oder tauschen"
             onPrimary={openCreateModal}
           />
         ) : (

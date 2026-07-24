@@ -282,19 +282,19 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
                           Dashboard
                         </Link>
                         <Link href="/intern/schwarzes-brett" className="block text-[14px] text-[var(--ink)] hover:text-[var(--surface-deep)]">
-                          Schwarzes Brett
+                          Suchen, anbieten, tauschen
                         </Link>
                         <Link href="/intern/skills" className="block text-[14px] text-[var(--ink)] hover:text-[var(--surface-deep)]">
-                          Skills
+                          Skillpool
                         </Link>
                         <Link href="/intern/verleihpool" className="block text-[14px] text-[var(--ink)] hover:text-[var(--surface-deep)]">
                           Verleihpool
                         </Link>
                         <Link href="/intern/kalender" className="block text-[14px] text-[var(--ink)] hover:text-[var(--surface-deep)]">
-                          Kalender
+                          Termine
                         </Link>
                         <Link href="/intern/raumbuchungen" className="block text-[14px] text-[var(--ink)] hover:text-[var(--surface-deep)]">
-                          Raumbuchungen
+                          Gemeinschaftsflächen
                         </Link>
                         <form action="/api/auth/logout" method="POST">
                           <button type="submit" className="block text-[14px] text-[var(--muted)] hover:text-[var(--ink)]">
@@ -328,13 +328,13 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
                   href="/intern/schwarzes-brett"
                   className={`text-[14px] transition-colors ${isActive('/intern/schwarzes-brett') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)] hover:text-[var(--surface-deep)]'}`}
                 >
-                  Schwarzes Brett
+                  Suchen, anbieten, tauschen
                 </Link>
                 <Link
                   href="/intern/skills"
                   className={`text-[14px] transition-colors ${isActive('/intern/skills') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)] hover:text-[var(--surface-deep)]'}`}
                 >
-                  Skills
+                  Skillpool
                 </Link>
                 <Link
                   href="/intern/verleihpool"
@@ -346,13 +346,13 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
                   href="/intern/kalender"
                   className={`text-[14px] transition-colors ${isActive('/intern/kalender') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)] hover:text-[var(--surface-deep)]'}`}
                 >
-                  Kalender
+                  Termine
                 </Link>
                 <Link
                   href="/intern/raumbuchungen"
                   className={`text-[14px] transition-colors ${isActive('/intern/raumbuchungen') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)] hover:text-[var(--surface-deep)]'}`}
                 >
-                  Raumbuchungen
+                  Gemeinschaftsflächen
                 </Link>
               </div>
               <form action="/api/auth/logout" method="POST">
@@ -374,13 +374,13 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
                 href="/intern/schwarzes-brett"
                 className={`snap-start text-[14px] transition-colors ${isActive('/intern/schwarzes-brett') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
-                Schwarzes Brett
+                Suchen, anbieten, tauschen
               </Link>
               <Link
                 href="/intern/skills"
                 className={`snap-start text-[14px] transition-colors ${isActive('/intern/skills') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
-                Skills
+                Skillpool
               </Link>
               <Link
                 href="/intern/verleihpool"
@@ -392,13 +392,13 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
                 href="/intern/kalender"
                 className={`snap-start text-[14px] transition-colors ${isActive('/intern/kalender') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
-                Kalender
+                Termine
               </Link>
               <Link
                 href="/intern/raumbuchungen"
                 className={`snap-start text-[14px] transition-colors ${isActive('/intern/raumbuchungen') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
-                Raumbuchungen
+                Gemeinschaftsflächen
               </Link>
               <form action="/api/auth/logout" method="POST" className="inline snap-start">
                 <button type="submit" className="text-[12px] text-[var(--muted)]">

@@ -17,10 +17,12 @@ function getScreen(pathname: string) {
   if (pathname === '/login') return { title: 'Bewohnerbereich', subtitle: 'Anmelden', parent: '/' }
   if (pathname === '/intern/dashboard') return { title: 'Mein Quartier', subtitle: 'Interner Bereich', parent: null }
   if (pathname.startsWith('/intern/schwarzes-brett')) return { title: 'Schwarzes Brett', subtitle: 'Suchen & anbieten', parent: null }
-  if (pathname.startsWith('/intern/skills')) return { title: 'Skills', subtitle: 'Wissen teilen', parent: null }
+  if (pathname.startsWith('/intern/skills')) return { title: 'Skillpool', subtitle: 'Wissen teilen', parent: null }
   if (pathname.startsWith('/intern/verleihpool')) return { title: 'Verleihpool', subtitle: 'Gemeinsam nutzen', parent: null }
   if (pathname.startsWith('/intern/kalender')) return { title: 'Kalender', subtitle: 'Was ansteht', parent: null }
-  if (pathname.startsWith('/intern/raumbuchungen')) return { title: 'Räume', subtitle: 'Buchen & planen', parent: null }
+  if (pathname === '/intern/raumbuchungen') return { title: 'Gemeinschaftsflächen', subtitle: 'Räume & Orte', parent: null }
+  if (pathname.endsWith('/gaesteappartement')) return { title: 'Gästeappartement', subtitle: 'Sheridan Park & Junia', parent: '/intern/raumbuchungen' }
+  if (pathname.endsWith('/gemeinschaftsraum')) return { title: 'Gemeinschaftsraum', subtitle: 'Sheridan Park & Junia', parent: '/intern/raumbuchungen' }
   return { title: 'Sheridan Quartier', subtitle: 'Augsburg', parent: '/' }
 }
 

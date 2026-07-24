@@ -1,203 +1,252 @@
 import Link from 'next/link'
+import AppIcon from '@/components/AppIcon'
+import CommunityBadge from '@/components/CommunityBadge'
+import type { CommunityId } from '@/lib/constants'
 
-const services = {
-  'sheridan-junia': [
-    {
-      name: 'Fahrradwerkstatt',
-      description: 'Werkstatt mit Werkzeug für Fahrradreparaturen',
-      icon: '🔧',
-      link: null
-    },
-    {
-      name: 'Lesenest',
-      description: 'Lesenest für Kinder',
-      icon: '📚',
-      link: null
-    }
-  ],
-  'wagnisshare': [
-    {
-      name: 'Gästeappartement',
-      description: 'Gemütliches Appartement für Gäste',
-      icon: '🏠',
-      link: null
-    },
-    {
-      name: 'Gemeinschaftsraum',
-      description: 'Großer Raum für Treffen und Veranstaltungen',
-      icon: '🎉',
-      link: null
-    },
-    {
-      name: 'Dachterrasse',
-      description: 'Gemeinsame Dachterrasse mit Grillmöglichkeit',
-      icon: '🌇',
-      link: null
-    }
-  ],
-  'wogenau': [
-    {
-      name: 'Gästeappartement',
-      description: 'Gemütliches Appartement für Gäste',
-      icon: '🏠',
-      link: null
-    },
-    {
-      name: 'Gemeinschaftsraum',
-      description: 'Großer Raum für Treffen und Veranstaltungen',
-      icon: '🎉',
-      link: null
-    },
-    {
-      name: 'Dachterrasse',
-      description: 'Gemeinsame Dachterrasse mit Grillmöglichkeit',
-      icon: '🌇',
-      link: null
-    }
-  ]
+type SpaceIcon = 'rooms' | 'home' | 'skills' | 'people'
+
+interface SharedSpace {
+  name: string
+  description: string
+  icon: SpaceIcon
+  link?: string
+  price?: string
 }
 
-const bookableRooms = [
+interface CommunitySpaces {
+  id: CommunityId
+  intro: string
+  spaces: SharedSpace[]
+}
+
+const communitySpaces: CommunitySpaces[] = [
   {
-    community: 'Sheridan Park & Junia',
-    name: 'Gästeappartement',
-    description: 'Gemütliches Appartement mit Schlafsofa und Hochbett für bis zu 4 Personen. Ausgestattet mit Bad und WLAN.',
-    price: '30 €/Nacht',
-    link: '/intern/raumbuchungen/gaesteappartement',
-    colorClass: 'border-[#2563EB]'
+    id: 'sheridan-junia',
+    intro: 'Bereits genutzte Gemeinschaftsflächen in den drei Häusern von Sheridan Park & Junia.',
+    spaces: [
+      {
+        name: 'Gemeinschaftsraum mit Lesenest',
+        description: 'Großer Raum mit Küche und Lesenest für Treffen, Feiern und gemeinsame Aktivitäten.',
+        icon: 'rooms',
+        link: '/intern/raumbuchungen/gemeinschaftsraum',
+        price: '8 € pro Stunde',
+      },
+      {
+        name: 'Gästeappartement',
+        description: 'Unterkunft für bis zu vier Gäste mit Bad, Schlafsofa, Hochbett und WLAN.',
+        icon: 'home',
+        link: '/intern/raumbuchungen/gaesteappartement',
+        price: '30 € pro Nacht',
+      },
+      {
+        name: 'Werkstatt',
+        description: 'Geteilte Fläche für handwerkliche Arbeiten und gemeinschaftliche Projekte.',
+        icon: 'skills',
+      },
+      {
+        name: 'Kulturschuppen',
+        description: 'Ort für Kultur, Veranstaltungen und Begegnung innerhalb der Gemeinschaft.',
+        icon: 'people',
+      },
+      {
+        name: 'Fahrradwerkstatt',
+        description: 'Gemeinsam genutzte Werkstatt mit Werkzeug für Pflege und Reparatur von Fahrrädern.',
+        icon: 'skills',
+      },
+    ],
   },
   {
-    community: 'Sheridan Park & Junia',
-    name: 'Gemeinschaftsraum',
-    description: 'Großer Raum für Treffen und Veranstaltungen.',
-    price: '8 €/Stunde',
-    link: '/intern/raumbuchungen/gemeinschaftsraum',
-    colorClass: 'border-[#2563EB]'
-  }
+    id: 'wagnisshare',
+    intro: 'Gemeinschaftlich geplante Orte von wagnisSHARE für Teilen, Begegnung und Nachbarschaft.',
+    spaces: [
+      {
+        name: 'Gemeinschaftsraum',
+        description: 'Gemeinsamer Raum für Treffen, Veranstaltungen und Aktivitäten im Haus.',
+        icon: 'rooms',
+      },
+      {
+        name: 'Gästeappartement',
+        description: 'Geteilte Unterkunft für den Besuch von Bewohnerinnen und Bewohnern.',
+        icon: 'home',
+      },
+      {
+        name: 'Werkstatt',
+        description: 'Gemeinschaftlich ausgestattete Fläche für Reparaturen und eigene Projekte.',
+        icon: 'skills',
+      },
+      {
+        name: 'Dachgärten und Dachterrassen',
+        description: 'Gemeinsame Freiflächen über den Häusern für Aufenthalt, Garten und Begegnung.',
+        icon: 'people',
+      },
+      {
+        name: 'Offener Quartiersplatz',
+        description: 'Nach Süden geöffneter Platz als Treffpunkt zwischen Haus und Quartier.',
+        icon: 'people',
+      },
+    ],
+  },
+  {
+    id: 'wogenau',
+    intro: 'Mehr als 300 Quadratmeter gemeinschaftliche Innen- und Außenflächen bei WOGENAU.',
+    spaces: [
+      {
+        name: 'Gemeinschaftsraum',
+        description: 'Große gemeinschaftlich nutzbare Innenfläche für Treffen und Veranstaltungen.',
+        icon: 'rooms',
+      },
+      {
+        name: 'Gästeappartement',
+        description: 'Geteilte Unterkunft für Gäste aus dem persönlichen Umfeld der Bewohner.',
+        icon: 'home',
+      },
+      {
+        name: 'Dachterrasse',
+        description: 'Gemeinsame Freifläche mit Blick über das Quartier.',
+        icon: 'people',
+      },
+      {
+        name: 'Gemeinschaftsgarten',
+        description: 'Grüne Fläche für gemeinsames Gärtnern, Aufenthalt und nachbarschaftliche Aktivitäten.',
+        icon: 'people',
+      },
+      {
+        name: 'Innenhof und Vorplatz',
+        description: 'Offene Begegnungsorte, die das Haus mit dem umliegenden Quartier verbinden.',
+        icon: 'people',
+      },
+    ],
+  },
 ]
 
-export default function RaumbuchungenPage() {
-  return (
-    <div className="min-h-screen pt-[calc(4.5rem+env(safe-area-inset-top))] pb-24 md:pt-28">
-      {/* Raumbuchungen */}
-      <section className="section bg-transparent py-4 md:bg-white md:py-24">
-        <div className="container-custom">
-          <div className="section-shell mb-8 hidden md:block md:mb-12">
-            <span className="eyebrow mb-4">Räume & Gäste</span>
-            <h1 className="mb-3 max-w-[12ch]">Buchbare Orte im Quartier.</h1>
-            <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">
-              Verfügbare Räume und Unterkünfte auf dem Handy schnell finden und direkt anfragen.
-            </p>
-          </div>
+function SpaceCard({ space }: { space: SharedSpace }) {
+  const content = (
+    <>
+      <div className="flex items-start justify-between gap-3">
+        <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] ${
+          space.link ? 'bg-[#dceadf] text-[#245747]' : 'bg-[#ebece7] text-[#66736b]'
+        }`}>
+          <AppIcon name={space.icon} className="h-[22px] w-[22px]" />
+        </span>
+        <span className={`rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.07em] ${
+          space.link
+            ? 'bg-[#dceadf] text-[#245747]'
+            : 'bg-[#eeeee9] text-[#737c76]'
+        }`}>
+          {space.link ? 'Buchbar' : 'Noch nicht online buchbar'}
+        </span>
+      </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 md:mb-24">
-            {bookableRooms.map((room, idx) => (
-              <div key={idx} className={`rounded-[28px] border ${room.colorClass} bg-[rgba(251,248,241,0.9)] p-5 shadow-[0_18px_40px_rgba(38,82,62,0.06)] md:p-6`}>
-                <div className="mb-4">
-                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6e6e73]">{room.community}</p>
-                  <h3 className="mb-3 text-[24px] font-medium text-[#1d1d1f]">{room.name}</h3>
-                  <p className="text-[17px] text-[#6e6e73] leading-[1.7] mb-4">
-                    {room.description}
-                  </p>
-                  <p className="mb-6 text-[20px] font-medium text-[#1d1d1f]">
-                    {room.price}
-                  </p>
-                </div>
-                <Link
-                  href={room.link}
-                  className="btn-primary w-full"
-                >
-                  Verfügbarkeit anfragen →
-                </Link>
-              </div>
-            ))}
-          </div>
+      <div className="mt-4">
+        <h3 className="mb-2 font-sans text-[18px] font-bold leading-[1.2] tracking-[-0.025em]">
+          {space.name}
+        </h3>
+        <p className="mb-0 text-[13px] leading-[1.55] text-[var(--muted)]">
+          {space.description}
+        </p>
+      </div>
+
+      {space.link && (
+        <div className="mt-4 flex items-center justify-between border-t border-[var(--line)] pt-4">
+          <span className="text-[11px] font-bold text-[#31594c]">{space.price}</span>
+          <span className="flex items-center gap-1.5 text-[11px] font-bold text-[var(--accent)]">
+            Details & Buchung
+            <AppIcon name="arrow" className="h-4 w-4" />
+          </span>
+        </div>
+      )}
+    </>
+  )
+
+  const className = `block rounded-[26px] border p-4 transition-transform duration-150 md:p-5 ${
+    space.link
+      ? 'border-[#9ebcad]/45 bg-white shadow-[0_14px_34px_rgba(28,64,49,0.07)] active:scale-[0.98]'
+      : 'border-[var(--line)] bg-white/[0.62]'
+  }`
+
+  return space.link ? (
+    <Link href={space.link} className={className}>
+      {content}
+    </Link>
+  ) : (
+    <article className={className}>
+      {content}
+    </article>
+  )
+}
+
+export default function GemeinschaftsflaechenPage() {
+  const totalSpaces = communitySpaces.reduce((sum, community) => sum + community.spaces.length, 0)
+  const bookableSpaces = communitySpaces.reduce(
+    (sum, community) => sum + community.spaces.filter((space) => Boolean(space.link)).length,
+    0
+  )
+
+  return (
+    <div className="min-h-screen pb-24 pt-[calc(4.5rem+env(safe-area-inset-top))] md:pt-28">
+      <section className="container-custom pt-4 md:pt-12">
+        <div className="max-w-[760px]">
+          <p className="app-kicker">Gemeinsam nutzen</p>
+          <h1 className="mb-3 max-w-[13ch] font-sans text-[30px] font-bold leading-[1.07] tracking-[-0.045em] md:text-[48px]">
+            Räume und Flächen, die wir teilen.
+          </h1>
+          <p className="mb-0 max-w-[58ch] text-[14px] leading-[1.65] text-[var(--muted)] md:text-[17px]">
+            Diese Übersicht zeigt, welche Gemeinschaftsflächen in den drei Projekten vorhanden oder geplant sind.
+            Wo bereits eine Online-Buchung möglich ist, führt die Fläche direkt zu den Details.
+          </p>
+        </div>
+
+        <div className="mt-6 grid grid-cols-3 divide-x divide-[var(--line)] rounded-[24px] bg-white/[0.78] py-4 shadow-[0_12px_30px_rgba(28,64,49,0.05)] md:max-w-[520px]">
+          {[
+            [communitySpaces.length, 'Projekte'],
+            [totalSpaces, 'Flächen'],
+            [bookableSpaces, 'buchbar'],
+          ].map(([value, label]) => (
+            <div key={label} className="text-center">
+              <div className="text-[22px] font-bold leading-none tracking-[-0.04em] text-[#245245]">{value}</div>
+              <div className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.07em] text-[var(--muted)]">{label}</div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Services nach Gemeinschaft */}
-      <section className="section bg-[#f5f5f7] py-12 md:py-24">
-        <div className="container-custom">
-          <div className="mb-12">
-            <span className="eyebrow mb-4">Was es außerdem gibt</span>
-            <h2 className="mb-4">Gemeinschaftliche Services</h2>
-            <p className="text-[16px] text-[#6e6e73] md:text-[17px]">
-              Räume und Angebote der drei Baugemeinschaften
-            </p>
-          </div>
+      <div className="container-custom mt-9 space-y-10 md:mt-14 md:space-y-16">
+        {communitySpaces.map((community) => {
+          const availableCount = community.spaces.filter((space) => Boolean(space.link)).length
 
-          {/* Sheridan & Junia */}
-          <div className="mb-16">
-            <h3 className="text-[24px] font-medium mb-6 text-[#1d1d1f]">Sheridan Park & Junia</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-              {services['sheridan-junia'].map((service, idx) => (
-                service.link ? (
-                  <Link key={idx} href={service.link} className="card hover:shadow-lg transition-shadow">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">{service.name}</h4>
-                    <p className="text-[14px] text-[#6e6e73]">{service.description}</p>
-                  </Link>
-                ) : (
-                  <div key={idx} className="card">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">{service.name}</h4>
-                    <p className="text-[14px] text-[#6e6e73]">{service.description}</p>
-                  </div>
-                )
-              ))}
-            </div>
-          </div>
+          return (
+            <section key={community.id}>
+              <div className="mb-4 flex items-start justify-between gap-4 md:mb-6">
+                <div>
+                  <CommunityBadge community={community.id} />
+                  <p className="mb-0 mt-2 max-w-[54ch] text-[12px] leading-[1.55] text-[var(--muted)] md:text-[14px]">
+                    {community.intro}
+                  </p>
+                </div>
+                <span className="shrink-0 pt-1 text-[10px] font-bold uppercase tracking-[0.07em] text-[var(--muted)]">
+                  {availableCount > 0 ? `${availableCount} buchbar` : 'Übersicht'}
+                </span>
+              </div>
 
-          {/* wagnisSHARE */}
-          <div className="mb-16">
-            <h3 className="text-[24px] font-medium mb-6 text-[#1d1d1f]">wagnisSHARE</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-              {services['wagnisshare'].map((service, idx) => (
-                service.link ? (
-                  <Link key={idx} href={service.link} className="card hover:shadow-lg transition-shadow">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">{service.name}</h4>
-                    <p className="text-[14px] text-[#6e6e73]">{service.description}</p>
-                  </Link>
-                ) : (
-                  <div key={idx} className="card">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">{service.name}</h4>
-                    <p className="text-[14px] text-[#6e6e73]">{service.description}</p>
-                  </div>
-                )
-              ))}
-            </div>
-          </div>
+              <div className="grid gap-3 md:grid-cols-2 md:gap-5 xl:grid-cols-3">
+                {community.spaces.map((space) => (
+                  <SpaceCard key={space.name} space={space} />
+                ))}
+              </div>
+            </section>
+          )
+        })}
+      </div>
 
-          {/* WOGENAU */}
+      <section className="container-custom mt-10 md:mt-16">
+        <div className="flex items-start gap-3 rounded-[24px] bg-[#ebe6d8] p-4 md:max-w-[760px] md:p-5">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-white/[0.72] text-[#6e633e]">
+            <AppIcon name="people" className="h-5 w-5" />
+          </span>
           <div>
-            <h3 className="text-[24px] font-medium mb-6 text-[#1d1d1f]">WOGENAU</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-              {services['wogenau'].map((service, idx) => (
-                service.link ? (
-                  <Link key={idx} href={service.link} className="card hover:shadow-lg transition-shadow">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">{service.name}</h4>
-                    <p className="text-[14px] text-[#6e6e73]">{service.description}</p>
-                  </Link>
-                ) : (
-                  <div key={idx} className="card">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">{service.name}</h4>
-                    <p className="text-[14px] text-[#6e6e73]">{service.description}</p>
-                  </div>
-                )
-              ))}
-            </div>
-          </div>
-
-          {/* Info Box */}
-          <div className="mt-12 rounded-[28px] border border-[#0071e3]/16 bg-white px-5 py-5 shadow-[0_18px_40px_rgba(38,82,62,0.06)] md:px-6">
-            <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">Hinweis</h4>
-            <p className="text-[14px] text-[#6e6e73]">
-              Für einige Services ist eine Buchung oder Reservierung erforderlich.
-              Bitte wenden Sie sich an Ihre jeweilige Hausgemeinschaft für weitere Details.
+            <div className="text-[13px] font-bold">Die Übersicht wächst mit dem Quartier.</div>
+            <p className="mb-0 mt-1 text-[12px] leading-[1.55] text-[var(--muted)] md:text-[13px]">
+              Buchungswege und weitere Details werden ergänzt, sobald sie von den jeweiligen Projekten bereitgestellt werden.
             </p>
           </div>
         </div>

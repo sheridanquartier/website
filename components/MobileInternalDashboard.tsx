@@ -33,11 +33,12 @@ interface MobileInternalDashboardProps {
 
 const actions = [
   {
-    href: '/intern/schwarzes-brett',
-    label: 'Eintrag erstellen',
-    hint: 'Suchen, anbieten, tauschen',
-    icon: 'plus' as const,
-    tone: 'bg-[#dceadf] text-[#235847]',
+    href: '/intern/raumbuchungen',
+    label: 'Gemeinschaftsflächen',
+    hint: 'Alle geteilten Räume und Flächen im Überblick',
+    icon: 'rooms' as const,
+    tone: 'bg-[#dce5ea] text-[#355b6c]',
+    wide: true,
   },
   {
     href: '/intern/kalender',
@@ -47,6 +48,13 @@ const actions = [
     tone: 'bg-[#f1dfd2] text-[#9b4e31]',
   },
   {
+    href: '/intern/schwarzes-brett',
+    label: 'Suchen, anbieten, tauschen',
+    hint: 'Das Schwarze Brett',
+    icon: 'board' as const,
+    tone: 'bg-[#dceadf] text-[#235847]',
+  },
+  {
     href: '/intern/verleihpool',
     label: 'Verleihpool',
     hint: 'Dinge gemeinsam nutzen',
@@ -54,11 +62,11 @@ const actions = [
     tone: 'bg-[#e5e7d4] text-[#536333]',
   },
   {
-    href: '/intern/raumbuchungen',
-    label: 'Räume buchen',
-    hint: 'Gäste & Gemeinschaft',
-    icon: 'rooms' as const,
-    tone: 'bg-[#dce5ea] text-[#355b6c]',
+    href: '/intern/skills',
+    label: 'Skillpool',
+    hint: 'Wissen teilen und finden',
+    icon: 'skills' as const,
+    tone: 'bg-[#eee2d5] text-[#9b573b]',
   },
 ]
 
@@ -92,16 +100,23 @@ export default function MobileInternalDashboard({
       <section className="mt-6 px-4">
         <div className="grid grid-cols-2 gap-3">
           {actions.map((action) => (
-            <Link key={action.href} href={action.href} className="app-action-tile">
+            <Link
+              key={action.href}
+              href={action.href}
+              className={`app-action-tile ${action.wide ? 'col-span-2 min-h-[126px] flex-row items-center gap-4' : ''}`}
+            >
               <span className={`flex h-11 w-11 items-center justify-center rounded-[16px] ${action.tone}`}>
                 <AppIcon name={action.icon} className="h-[22px] w-[22px]" />
               </span>
-              <span className="mt-5 block text-[15px] font-bold leading-[1.2] tracking-[-0.02em]">
-                {action.label}
+              <span className={action.wide ? 'min-w-0 flex-1' : ''}>
+                <span className={`${action.wide ? 'mt-0 text-[17px]' : 'mt-5 text-[15px]'} block font-bold leading-[1.2] tracking-[-0.02em]`}>
+                  {action.label}
+                </span>
+                <span className="mt-1 block text-[11px] leading-[1.35] text-[var(--muted)]">
+                  {action.hint}
+                </span>
               </span>
-              <span className="mt-1 block text-[11px] leading-[1.35] text-[var(--muted)]">
-                {action.hint}
-              </span>
+              {action.wide && <AppIcon name="arrow" className="ml-auto h-5 w-5 shrink-0 text-[#587065]" />}
             </Link>
           ))}
         </div>
@@ -164,7 +179,7 @@ export default function MobileInternalDashboard({
             <div className="px-5 py-8 text-center">
               <p className="mb-1 text-[15px] font-bold">Noch nichts eingetragen</p>
               <p className="mb-4 text-[13px] leading-[1.5] text-[var(--muted)]">Starte den ersten Austausch im Quartier.</p>
-              <Link href="/intern/schwarzes-brett" className="text-[13px] font-bold text-[var(--accent)]">Eintrag erstellen</Link>
+              <Link href="/intern/schwarzes-brett" className="text-[13px] font-bold text-[var(--accent)]">Suchen, anbieten oder tauschen</Link>
             </div>
           ) : (
             recentPosts.slice(0, 4).map((post) => (
@@ -187,20 +202,6 @@ export default function MobileInternalDashboard({
         </div>
       </section>
 
-      <section className="mx-4 mt-9 rounded-[26px] border border-[var(--line)] bg-[#f2eadf] p-5">
-        <div className="flex items-start gap-4">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] bg-white/70 text-[#9b573b]">
-            <AppIcon name="skills" className="h-5 w-5" />
-          </span>
-          <div>
-            <div className="text-[15px] font-bold">Wer kann was?</div>
-            <p className="mb-3 mt-1 text-[13px] leading-[1.5] text-[var(--muted)]">
-              Fähigkeiten im Quartier finden oder eigenes Wissen anbieten.
-            </p>
-            <Link href="/intern/skills" className="text-[12px] font-bold text-[#9b573b]">Skills entdecken</Link>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

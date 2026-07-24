@@ -130,12 +130,12 @@ export default async function InternDashboardPage() {
   const serviceLinks = [
     {
       href: '/intern/schwarzes-brett',
-      title: 'Schwarzes Brett',
+      title: 'Suchen, anbieten, tauschen',
       description: 'Angebote, Gesuche und Tauschangebote aus der Nachbarschaft',
     },
     {
       href: '/intern/skills',
-      title: 'Skills',
+      title: 'Skillpool',
       description: 'Fähigkeiten teilen und voneinander lernen',
     },
     {
@@ -145,13 +145,13 @@ export default async function InternDashboardPage() {
     },
     {
       href: '/intern/kalender',
-      title: 'Kalender',
+      title: 'Termine',
       description: 'Alle Termine und Events im Überblick',
     },
     {
       href: '/intern/raumbuchungen',
-      title: 'Raumbuchungen',
-      description: 'Gemeinschaftsraum und Gästeappartement buchen',
+      title: 'Gemeinschaftsflächen',
+      description: 'Geteilte Räume und Flächen aus allen Projekten',
     },
   ]
 

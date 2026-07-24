@@ -84,8 +84,8 @@ export default function MobileTabBar({ isLoggedIn = false }: MobileTabBarProps) 
     { href: '/datenschutz', title: 'Datenschutz', icon: 'lock' as const },
   ]
   const internalMenu = [
-    { href: '/intern/skills', title: 'Skills', subtitle: 'Wissen anbieten und finden', icon: 'skills' as const },
-    { href: '/intern/raumbuchungen', title: 'Raumbuchungen', subtitle: 'Räume und Gästeappartements', icon: 'rooms' as const },
+    { href: '/intern/skills', title: 'Skillpool', subtitle: 'Wissen anbieten und finden', icon: 'skills' as const },
+    { href: '/intern/raumbuchungen', title: 'Gemeinschaftsflächen', subtitle: 'Geteilte Räume und Flächen', icon: 'rooms' as const },
     { href: '/neuigkeiten', title: 'Neuigkeiten', subtitle: 'Öffentliche Beiträge', icon: 'news' as const },
     { href: '/quartier', title: 'Quartierskarte', subtitle: 'Orte und Projekte', icon: 'map' as const },
   ]
