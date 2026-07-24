@@ -238,14 +238,14 @@ export default function SchwarzesBrettPage() {
   }
 
   return (
-    <div className="pt-24 pb-24 md:pt-28">
+    <div className="pt-[calc(4.5rem+env(safe-area-inset-top))] pb-24 md:pt-28">
       <div className="container-custom space-y-6 md:space-y-8">
         <div className="section-shell">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="eyebrow mb-4">Teilen & Finden</span>
-              <h1 className="mb-3 max-w-[12ch]">Schwarzes Brett im Quartier.</h1>
-              <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">
+              <span className="eyebrow mb-4 hidden md:inline-flex">Teilen & Finden</span>
+              <h1 className="mb-3 hidden max-w-[12ch] md:block">Schwarzes Brett im Quartier.</h1>
+              <p className="mb-0 max-w-[38rem] text-[14px] leading-[1.55] text-[var(--muted)] md:text-[18px] md:leading-[1.7]">
                 Angebote, Gesuche und Tauschangebote schnell durchsuchen oder direkt selbst einstellen.
               </p>
             </div>
@@ -266,7 +266,7 @@ export default function SchwarzesBrettPage() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-2 gap-2.5 md:gap-4">
             <div>
               <label className="block text-sm font-medium mb-2">Art</label>
               <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="input">

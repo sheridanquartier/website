@@ -16,7 +16,7 @@ const config: Config = {
         'anthracite': '#1C1C1A',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-body)', 'Manrope', 'system-ui', 'sans-serif'],
       },
       backgroundColor: {
         'default': '#FAFAF8',

@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { cookies } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
 import CommunityBadge from '@/components/CommunityBadge'
+import MobileHome from '@/components/MobileHome'
+import { verifyCookie } from '@/lib/auth/cookies'
 import { formatDate } from '@/lib/utils/dateFormat'
 import type { CommunityId } from '@/lib/constants'
 
@@ -73,9 +76,26 @@ export default async function HomePage() {
 
   const featuredPost = blogPosts?.[0]
   const secondaryPosts = blogPosts?.slice(1) || []
+  const cookieStore = await cookies()
+  const sessionToken = cookieStore.get('quartier_session')?.value
+  const isLoggedIn = sessionToken ? Boolean(await verifyCookie(sessionToken)) : false
 
   return (
-    <div className="pt-16">
+    <>
+      <MobileHome
+        posts={(blogPosts || []) as Array<{
+          id: string
+          title: string
+          slug: string
+          excerpt: string | null
+          image_url: string | null
+          published_at: string
+          community: CommunityId
+        }>}
+        isLoggedIn={isLoggedIn}
+      />
+
+      <div className="hidden pt-16 md:block">
       <section className="section pb-14 md:pb-18">
         <div className="container-custom">
           <div className="section-shell">
@@ -364,6 +384,7 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-    </div>
+      </div>
+    </>
   )
 }

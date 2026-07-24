@@ -28,9 +28,9 @@ export default async function KalenderPage() {
   }
 
   return (
-    <div className="pt-24 pb-24 md:pt-28">
+    <div className="pt-[calc(4.5rem+env(safe-area-inset-top))] pb-24 md:pt-28">
       <div className="container-custom space-y-6 md:space-y-8">
-        <div className="section-shell">
+        <div className="section-shell hidden md:block">
           <span className="eyebrow mb-4">Gemeinsam planen</span>
           <h1 className="mb-3 max-w-[12ch]">Termine im Quartier auf einen Blick.</h1>
           <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">

@@ -5,14 +5,32 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Sheridan Quartier',
     short_name: 'Quartier',
     description: 'Die Plattform für Neuigkeiten, Schwarzes Brett, Kalender und Raumbuchungen im Sheridan Quartier.',
+    id: '/',
     start_url: '/',
     scope: '/',
     display: 'standalone',
     orientation: 'portrait',
-    background_color: '#edf3ec',
-    theme_color: '#edf3ec',
+    background_color: '#f2f4ee',
+    theme_color: '#f2f4ee',
     categories: ['community', 'lifestyle', 'productivity'],
     lang: 'de',
+    shortcuts: [
+      {
+        name: 'Mein Quartier',
+        short_name: 'Intern',
+        url: '/intern/dashboard',
+      },
+      {
+        name: 'Schwarzes Brett',
+        short_name: 'Brett',
+        url: '/intern/schwarzes-brett',
+      },
+      {
+        name: 'Kalender',
+        short_name: 'Kalender',
+        url: '/intern/kalender',
+      },
+    ],
     icons: [
       {
         src: '/icon',

@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/client'
 import { COMMUNITIES } from '@/lib/constants'
 import type { CommunityId } from '@/lib/constants'
 import { getAdminAccess } from '@/lib/auth/admin'
+import MobileAppHeader from '@/components/MobileAppHeader'
 
 interface NavigationProps {
   isLoggedIn?: boolean
@@ -152,8 +153,10 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
   // Öffentliche Navigation + optionale zweite Leiste
   return (
     <>
+      <MobileAppHeader isLoggedIn={isLoggedIn} />
+
       {/* Hauptnavigation (immer sichtbar) */}
-      <nav className="fixed top-0 left-0 right-0 z-50 h-[calc(3rem+env(safe-area-inset-top))] border-b border-[var(--line)] bg-[rgba(252,255,251,0.88)] pt-[env(safe-area-inset-top)] backdrop-blur-[20px] md:h-12 md:pt-0">
+      <nav className="fixed top-0 left-0 right-0 z-50 hidden h-12 border-b border-[var(--line)] bg-[rgba(252,255,251,0.88)] backdrop-blur-[20px] md:block">
         <div className="container-custom h-full">
           <div className="flex justify-between items-center h-full">
             <Link href="/" className="min-w-0">
@@ -310,7 +313,7 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
 
       {/* Zweite Navigation (nur im internen Bereich) */}
       {isLoggedIn && (
-        <div className="fixed left-0 right-0 top-[calc(3rem+env(safe-area-inset-top))] z-40 h-10 border-b border-[var(--line)] bg-[rgba(230,241,231,0.82)] md:top-12">
+        <div className="fixed left-0 right-0 top-12 z-40 hidden h-10 border-b border-[var(--line)] bg-[rgba(230,241,231,0.82)] md:block">
           <div className="container-custom h-full">
             {/* Desktop: normale horizontale Liste */}
             <div className="hidden md:flex items-center justify-between h-full">

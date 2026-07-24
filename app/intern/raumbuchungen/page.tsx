@@ -78,11 +78,11 @@ const bookableRooms = [
 
 export default function RaumbuchungenPage() {
   return (
-    <div className="min-h-screen pt-24 pb-24 md:pt-28">
+    <div className="min-h-screen pt-[calc(4.5rem+env(safe-area-inset-top))] pb-24 md:pt-28">
       {/* Raumbuchungen */}
-      <section className="section bg-white py-12 md:py-24">
+      <section className="section bg-transparent py-4 md:bg-white md:py-24">
         <div className="container-custom">
-          <div className="section-shell mb-8 md:mb-12">
+          <div className="section-shell mb-8 hidden md:block md:mb-12">
             <span className="eyebrow mb-4">Räume & Gäste</span>
             <h1 className="mb-3 max-w-[12ch]">Buchbare Orte im Quartier.</h1>
             <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">

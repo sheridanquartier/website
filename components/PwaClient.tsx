@@ -7,6 +7,8 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>
 }
 
+const INSTALL_HINT_DISMISSED_KEY = 'quartier-install-hint-dismissed'
+
 function isStandaloneMode() {
   if (typeof window === 'undefined') {
     return false
@@ -32,12 +34,18 @@ export default function PwaClient() {
   }, [])
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch((error) => {
-          console.error('Service worker registration failed:', error)
-        })
+    const registerServiceWorker = () => {
+      navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).catch((error) => {
+        console.error('Service worker registration failed:', error)
       })
+    }
+
+    if ('serviceWorker' in navigator) {
+      if (document.readyState === 'complete') {
+        registerServiceWorker()
+      } else {
+        window.addEventListener('load', registerServiceWorker, { once: true })
+      }
     }
 
     const updateDisplayMode = () => {
@@ -65,14 +73,21 @@ export default function PwaClient() {
     window.addEventListener('beforeinstallprompt', onBeforeInstallPrompt)
     window.addEventListener('appinstalled', onAppInstalled)
 
-    if (!isStandaloneMode() && isIosSafari) {
-      setIosHintVisible(true)
+    let iosHintTimer: ReturnType<typeof setTimeout> | undefined
+    if (
+      !isStandaloneMode() &&
+      isIosSafari &&
+      window.localStorage.getItem(INSTALL_HINT_DISMISSED_KEY) !== 'true'
+    ) {
+      iosHintTimer = setTimeout(() => setIosHintVisible(true), 1600)
     }
 
     return () => {
+      window.removeEventListener('load', registerServiceWorker)
       mediaQuery.removeEventListener('change', onMediaChange)
       window.removeEventListener('beforeinstallprompt', onBeforeInstallPrompt)
       window.removeEventListener('appinstalled', onAppInstalled)
+      if (iosHintTimer) clearTimeout(iosHintTimer)
     }
   }, [isIosSafari])
 
@@ -88,13 +103,19 @@ export default function PwaClient() {
     }
   }
 
+  const dismissHint = () => {
+    setInstallVisible(false)
+    setIosHintVisible(false)
+    window.localStorage.setItem(INSTALL_HINT_DISMISSED_KEY, 'true')
+  }
+
   if ((!installVisible && !iosHintVisible) || isStandaloneMode()) {
     return null
   }
 
   return (
-    <div className="md:hidden fixed left-4 right-4 z-[70] bottom-[calc(5.6rem+env(safe-area-inset-bottom))]">
-      <div className="rounded-[26px] border border-[rgba(31,77,67,0.12)] bg-[rgba(251,248,241,0.96)] px-4 py-4 shadow-[0_18px_44px_rgba(31,77,67,0.12)] backdrop-blur-[18px]">
+    <div className="md:hidden fixed left-4 right-4 z-[75] bottom-[calc(5.6rem+env(safe-area-inset-bottom))]">
+      <div className="rounded-[24px] border border-white/50 bg-[rgba(251,251,247,0.96)] px-4 py-4 shadow-[0_20px_48px_rgba(22,57,47,0.2)] backdrop-blur-[20px]">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="mb-1 text-[15px] font-semibold leading-[1.25] text-[var(--ink)]">
@@ -109,8 +130,7 @@ export default function PwaClient() {
           <button
             type="button"
             onClick={() => {
-              setInstallVisible(false)
-              setIosHintVisible(false)
+              dismissHint()
             }}
             className="shrink-0 rounded-full p-2 text-[var(--muted)]"
             aria-label="Hinweis schließen"

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import CommunityBadge from '@/components/CommunityBadge'
 import EventCard from '@/components/EventCard'
+import MobileInternalDashboard from '@/components/MobileInternalDashboard'
 import { createClient } from '@/lib/supabase/server'
 import { COMMUNITIES, type CommunityId } from '@/lib/constants'
 import { formatDate } from '@/lib/utils/dateFormat'
@@ -155,7 +156,16 @@ export default async function InternDashboardPage() {
   ]
 
   return (
-    <div className="pt-24 pb-24 md:pt-28">
+    <>
+      <MobileInternalDashboard
+        activePostsCount={activePostsCount}
+        upcomingEventsCount={upcomingEventsCount}
+        lendItemsCount={lendItemsCount}
+        recentPosts={recentPosts}
+        upcomingEvents={upcomingEvents}
+      />
+
+      <div className="hidden pt-24 pb-24 md:block md:pt-28">
       <section className="section bg-white py-12 md:py-24">
         <div className="container-custom">
           <div className="editorial-panel relative overflow-hidden px-5 py-6 md:px-10 md:py-10">
@@ -359,6 +369,7 @@ export default async function InternDashboardPage() {
           </section>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }

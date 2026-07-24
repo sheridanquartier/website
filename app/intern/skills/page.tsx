@@ -211,19 +211,22 @@ export default function SkillsPage() {
   }
 
   return (
-    <div className="pt-28 pb-16">
+    <div className="pt-[calc(4.5rem+env(safe-area-inset-top))] pb-24 md:pt-28">
       <div className="container-custom">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div className="section-shell mb-6 flex flex-col justify-between gap-4 md:mb-8 md:flex-row md:items-end">
           <div>
-            <h1 className="text-4xl font-bold mb-2">Skills</h1>
-            <p className="text-gray-600">Fähigkeiten anbieten und suchen</p>
+            <span className="eyebrow mb-4 hidden md:inline-flex">Wissen teilen</span>
+            <h1 className="mb-2 hidden md:block">Skills im Quartier.</h1>
+            <p className="mb-0 text-[14px] leading-[1.55] text-[var(--muted)] md:text-[17px]">
+              Fähigkeiten anbieten, Unterstützung suchen und voneinander lernen.
+            </p>
           </div>
           <button onClick={() => { resetForm(); setIsModalOpen(true) }} className="btn-primary w-full md:w-auto">
             + Neuer Eintrag
           </button>
         </div>
 
-        <div className="card mb-8">
+        <div className="editorial-panel mb-6 p-4 md:mb-8 md:p-6">
           <label className="block text-sm font-medium mb-2">Gemeinschaft</label>
           <select value={communityFilter} onChange={(e) => setCommunityFilter(e.target.value)} className="input max-w-md">
             <option value="alle">Alle</option>

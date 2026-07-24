@@ -31,7 +31,94 @@ export default async function NeuigkeitenPage() {
   const remainingPosts = (posts?.slice(1) || []) as BlogPost[]
 
   return (
-    <div className="pt-16 min-h-screen">
+    <>
+      <div className="app-screen md:hidden">
+        <section className="px-4 pt-4">
+          <p className="app-kicker">Aus den Gemeinschaften</p>
+          <h1 className="mb-2 font-sans text-[30px] font-bold leading-[1.08] tracking-[-0.045em]">
+            Was gerade passiert.
+          </h1>
+          <p className="mb-0 max-w-[32ch] text-[14px] leading-[1.55] text-[var(--muted)]">
+            Fortschritte, Einblicke und Geschichten aus dem Sheridan Quartier.
+          </p>
+        </section>
+
+        {!posts || posts.length === 0 ? (
+          <div className="mx-4 mt-7 rounded-[26px] bg-white/[0.78] px-5 py-10 text-center">
+            <p className="mb-1 text-[15px] font-bold">Noch keine Beiträge</p>
+            <p className="mb-0 text-[13px] text-[var(--muted)]">Schau bald wieder vorbei.</p>
+          </div>
+        ) : (
+          <section className="mt-6 px-4">
+            {featuredPost && (
+              <Link href={`/neuigkeiten/${featuredPost.slug}`} className="app-news-feature">
+                {featuredPost.image_url && (
+                  <div className="relative h-[225px] overflow-hidden">
+                    <Image
+                      src={featuredPost.image_url}
+                      alt={featuredPost.title}
+                      fill
+                      sizes="100vw"
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                )}
+                <div className="p-4">
+                  <div className="mb-3 flex items-center gap-2">
+                    <CommunityBadge community={featuredPost.community} size="sm" />
+                    <span className="text-[11px] font-medium text-[var(--muted)]">
+                      {formatDateLong(featuredPost.published_at)}
+                    </span>
+                  </div>
+                  <h2 className="mb-2 font-sans text-[22px] font-bold leading-[1.18] tracking-[-0.035em]">
+                    {featuredPost.title}
+                  </h2>
+                  {featuredPost.excerpt && (
+                    <p className="mb-0 line-clamp-3 text-[14px] leading-[1.55] text-[var(--muted)]">
+                      {featuredPost.excerpt}
+                    </p>
+                  )}
+                </div>
+              </Link>
+            )}
+
+            {remainingPosts.length > 0 && (
+              <div className="mt-4 overflow-hidden rounded-[26px] bg-white/[0.78] shadow-[0_14px_34px_rgba(28,64,49,0.05)]">
+                {remainingPosts.map((post) => (
+                  <Link
+                    key={post.id}
+                    href={`/neuigkeiten/${post.slug}`}
+                    className="flex items-center gap-3 border-b border-[var(--line)] p-3.5 last:border-0"
+                  >
+                    <div className="relative h-[82px] w-[82px] shrink-0 overflow-hidden rounded-[19px] bg-[#e4ebe4]">
+                      {post.image_url && (
+                        <Image src={post.image_url} alt="" fill sizes="82px" className="object-cover" />
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.07em] text-[var(--accent)]">
+                        {formatDateLong(post.published_at)}
+                      </div>
+                      <h2 className="mb-1 line-clamp-2 font-sans text-[15px] font-bold leading-[1.3] tracking-[-0.02em]">
+                        {post.title}
+                      </h2>
+                      {post.excerpt && (
+                        <p className="mb-0 line-clamp-1 text-[12px] text-[var(--muted)]">{post.excerpt}</p>
+                      )}
+                    </div>
+                    <svg className="h-4 w-4 shrink-0 text-[#87938c]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="m9 6 6 6-6 6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
+      </div>
+
+      <div className="hidden min-h-screen pt-16 md:block">
       <section className="section">
         <div className="container-custom">
           <div className="mb-12 section-shell">
@@ -112,6 +199,7 @@ export default async function NeuigkeitenPage() {
           )}
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }

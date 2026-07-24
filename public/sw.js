@@ -1,9 +1,9 @@
-const CACHE_NAME = 'sheridan-quartier-v1'
-const APP_SHELL = ['/', '/quartier', '/neuigkeiten', '/login']
+const CACHE_NAME = 'sheridan-quartier-v2'
+const PUBLIC_FALLBACKS = ['/', '/quartier', '/neuigkeiten', '/login']
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PUBLIC_FALLBACKS))
   )
   self.skipWaiting()
 })
@@ -25,7 +25,13 @@ self.addEventListener('fetch', (event) => {
   const { request } = event
   const url = new URL(request.url)
 
-  if (request.method !== 'GET' || url.origin !== self.location.origin) {
+  if (
+    request.method !== 'GET' ||
+    url.origin !== self.location.origin ||
+    url.pathname.startsWith('/api/') ||
+    url.pathname.startsWith('/intern/') ||
+    url.pathname.startsWith('/admin/')
+  ) {
     return
   }
 
@@ -33,8 +39,10 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const clone = response.clone()
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone))
+          if (response.ok && PUBLIC_FALLBACKS.includes(url.pathname)) {
+            const clone = response.clone()
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone))
+          }
           return response
         })
         .catch(async () => {
@@ -45,19 +53,28 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      const network = fetch(request)
-        .then((response) => {
-          if (response.ok) {
-            const clone = response.clone()
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone))
-          }
-          return response
-        })
-        .catch(() => cached)
+  const isStaticAsset =
+    url.pathname.startsWith('/_next/static/') ||
+    url.pathname.startsWith('/images/') ||
+    url.pathname === '/manifest.webmanifest' ||
+    url.pathname === '/icon' ||
+    url.pathname === '/apple-icon'
 
-      return cached || network
-    })
-  )
-}
+  if (isStaticAsset) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        const network = fetch(request)
+          .then((response) => {
+            if (response.ok) {
+              const clone = response.clone()
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone))
+            }
+            return response
+          })
+          .catch(() => cached)
+
+        return cached || network
+      })
+    )
+  }
+})

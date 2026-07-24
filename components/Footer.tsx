@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="mt-28 border-t border-[var(--line)] bg-[linear-gradient(180deg,rgba(247,244,238,0.96)_0%,rgba(232,240,232,0.96)_100%)] py-18">
+    <footer className="mt-28 hidden border-t border-[var(--line)] bg-[linear-gradient(180deg,rgba(247,244,238,0.96)_0%,rgba(232,240,232,0.96)_100%)] py-18 md:block">
       <div className="container-custom">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.2fr_0.85fr_0.85fr_0.9fr]">
           <div>

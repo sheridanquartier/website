@@ -6,7 +6,66 @@ const sharedMapUrl =
 
 export default function QuartierPage() {
   return (
-    <div className="min-h-screen pt-16">
+    <>
+      <div className="app-screen md:hidden">
+        <section className="px-4 pt-4">
+          <p className="app-kicker">Orientierung</p>
+          <h1 className="mb-2 font-sans text-[30px] font-bold leading-[1.08] tracking-[-0.045em]">
+            Alles in der Nähe.
+          </h1>
+          <p className="mb-0 text-[14px] leading-[1.55] text-[var(--muted)]">
+            Projekte, Gemeinschaftsräume und Gästeappartements auf einen Blick.
+          </p>
+        </section>
+
+        <section className="mt-5 px-4">
+          <div className="relative overflow-hidden rounded-[30px] bg-[#dfe7df] shadow-[0_18px_44px_rgba(28,64,49,0.12)]">
+            <iframe
+              src={mapUrl}
+              title="Quartierskarte Sheridan Quartier"
+              className="h-[55svh] min-h-[430px] w-full"
+              loading="eager"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(19,47,39,0.72))]" />
+            <Link
+              href={sharedMapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-4 left-4 right-4 flex min-h-[50px] items-center justify-between rounded-[18px] bg-white px-4 text-[13px] font-bold text-[#214f41] shadow-lg"
+            >
+              In Google Maps öffnen
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M14 5h5v5M19 5l-8 8M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+        </section>
+
+        <section className="mt-7 px-4">
+          <p className="app-kicker">Auf der Karte</p>
+          <div className="mt-3 overflow-hidden rounded-[24px] bg-white/[0.78]">
+            {[
+              ['3', 'Wohnprojekte', 'farblich hervorgehoben'],
+              ['A', 'Gästeappartements', 'für Besuch im Quartier'],
+              ['R', 'Gemeinschaftsräume', 'für Begegnung und Termine'],
+            ].map(([mark, title, detail]) => (
+              <div key={title} className="flex items-center gap-3 border-b border-[var(--line)] p-4 last:border-0">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#e3ece5] text-[13px] font-bold text-[#285849]">
+                  {mark}
+                </span>
+                <span>
+                  <span className="block text-[14px] font-bold">{title}</span>
+                  <span className="mt-0.5 block text-[11px] text-[var(--muted)]">{detail}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <div className="hidden min-h-screen pt-16 md:block">
       <section className="section pb-14 md:pb-18">
         <div className="container-custom">
           <div className="section-shell">
@@ -89,6 +148,7 @@ export default function QuartierPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }

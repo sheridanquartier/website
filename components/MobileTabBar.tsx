@@ -1,100 +1,183 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import AppIcon from '@/components/AppIcon'
 
 interface MobileTabBarProps {
   isLoggedIn?: boolean
 }
 
 interface TabItem {
-  href: string
+  href?: string
   label: string
-  icon: React.ReactNode
+  icon: 'home' | 'map' | 'news' | 'lock' | 'people' | 'board' | 'lend' | 'calendar' | 'more'
+  match?: string
+  action?: 'more'
 }
 
-function TabLink({ href, label, icon, active }: TabItem & { active: boolean }) {
+function TabContent({ label, icon, active }: Pick<TabItem, 'label' | 'icon'> & { active: boolean }) {
   return (
-    <Link
-      href={href}
-      className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-[18px] px-2 py-2 text-center transition-colors ${
-        active ? 'bg-white text-[var(--surface-deep)] shadow-sm' : 'text-[var(--muted)]'
-      }`}
-    >
-      <span className="flex h-5 w-5 items-center justify-center">{icon}</span>
-      <span className="truncate text-[11px] font-semibold leading-none">{label}</span>
-    </Link>
+    <>
+      <span className={`relative flex h-7 w-10 items-center justify-center rounded-full transition-all duration-200 ${
+        active ? 'bg-[#dce9df] text-[#1f5948]' : 'text-[#6f7a73]'
+      }`}>
+        <AppIcon name={icon} className="h-[20px] w-[20px]" />
+      </span>
+      <span className={`text-[10px] font-semibold leading-none ${active ? 'text-[#1f5948]' : 'text-[#6f7a73]'}`}>
+        {label}
+      </span>
+    </>
   )
 }
 
 export default function MobileTabBar({ isLoggedIn = false }: MobileTabBarProps) {
   const pathname = usePathname()
+  const [moreOpen, setMoreOpen] = useState(false)
+  const isInternal = pathname.startsWith('/intern')
+
+  useEffect(() => {
+    setMoreOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!moreOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [moreOpen])
 
   if (pathname.startsWith('/admin')) {
     return null
   }
 
-  const internalTabs: TabItem[] = [
-    {
-      href: '/intern/dashboard',
-      label: 'Start',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13V10.5" /></svg>,
-    },
-    {
-      href: '/intern/schwarzes-brett',
-      label: 'Brett',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M6 5h12a1 1 0 0 1 1 1v12H5V6a1 1 0 0 1 1-1Z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M8 9h8M8 13h5" /></svg>,
-    },
-    {
-      href: '/intern/skills',
-      label: 'Skills',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M14 7a3 3 0 1 1 3 3h-2l-8 8a2 2 0 1 1-2-2l8-8V7Z" /></svg>,
-    },
-    {
-      href: '/intern/kalender',
-      label: 'Kalender',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M7 3v3M17 3v3M4.5 9.5h15M6 5h12a1.5 1.5 0 0 1 1.5 1.5v11A1.5 1.5 0 0 1 18 19H6a1.5 1.5 0 0 1-1.5-1.5v-11A1.5 1.5 0 0 1 6 5Z" /></svg>,
-    },
-    {
-      href: '/intern/raumbuchungen',
-      label: 'Räume',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M4 20V7.5A1.5 1.5 0 0 1 5.5 6H11v14M11 4h7.5A1.5 1.5 0 0 1 20 5.5V20M8 10h0M8 14h0M15.5 10h0M15.5 14h0" /></svg>,
-    },
-  ]
-
   const publicTabs: TabItem[] = [
-    {
-      href: '/',
-      label: 'Start',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13V10.5" /></svg>,
-    },
-    {
-      href: '/quartier',
-      label: 'Quartier',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M12 21s6-4.35 6-10a6 6 0 1 0-12 0c0 5.65 6 10 6 10Z" /><circle cx="12" cy="11" r="2.5" strokeWidth="1.8" /></svg>,
-    },
-    {
-      href: '/neuigkeiten',
-      label: 'News',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M5 6.5A1.5 1.5 0 0 1 6.5 5H18v12.5A1.5 1.5 0 0 1 16.5 19H8a3 3 0 0 1-3-3V6.5Z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M8 9h7M8 12h7M8 15h4" /></svg>,
-    },
+    { href: '/', label: 'Start', icon: 'home', match: '/' },
+    { href: '/quartier', label: 'Karte', icon: 'map', match: '/quartier' },
+    { href: '/neuigkeiten', label: 'Aktuell', icon: 'news', match: '/neuigkeiten' },
     {
       href: isLoggedIn ? '/intern/dashboard' : '/login',
       label: isLoggedIn ? 'Intern' : 'Login',
-      icon: <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M15 8V6.5A3.5 3.5 0 0 0 11.5 3 3.5 3.5 0 0 0 8 6.5V8M7 8h10a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" /></svg>,
+      icon: isLoggedIn ? 'people' : 'lock',
+      match: isLoggedIn ? '/intern' : '/login',
     },
+    { label: 'Mehr', icon: 'more', action: 'more' },
   ]
 
-  const tabs = isLoggedIn ? internalTabs : publicTabs
+  const internalTabs: TabItem[] = [
+    { href: '/intern/dashboard', label: 'Start', icon: 'home', match: '/intern/dashboard' },
+    { href: '/intern/schwarzes-brett', label: 'Brett', icon: 'board', match: '/intern/schwarzes-brett' },
+    { href: '/intern/verleihpool', label: 'Leihen', icon: 'lend', match: '/intern/verleihpool' },
+    { href: '/intern/kalender', label: 'Kalender', icon: 'calendar', match: '/intern/kalender' },
+    { label: 'Mehr', icon: 'more', action: 'more' },
+  ]
+
+  const tabs = isInternal ? internalTabs : publicTabs
+  const publicMenu = [
+    { href: '/projekte/sheridan-junia', title: 'Sheridan Park & Junia', icon: 'projects' as const },
+    { href: '/projekte/wagnisshare', title: 'wagnisSHARE', icon: 'projects' as const },
+    { href: '/projekte/wogenau', title: 'WOGENAU', icon: 'projects' as const },
+    { href: '/impressum', title: 'Impressum', icon: 'news' as const },
+    { href: '/datenschutz', title: 'Datenschutz', icon: 'lock' as const },
+  ]
+  const internalMenu = [
+    { href: '/intern/skills', title: 'Skills', subtitle: 'Wissen anbieten und finden', icon: 'skills' as const },
+    { href: '/intern/raumbuchungen', title: 'Raumbuchungen', subtitle: 'Räume und Gästeappartements', icon: 'rooms' as const },
+    { href: '/neuigkeiten', title: 'Neuigkeiten', subtitle: 'Öffentliche Beiträge', icon: 'news' as const },
+    { href: '/quartier', title: 'Quartierskarte', subtitle: 'Orte und Projekte', icon: 'map' as const },
+  ]
 
   return (
-    <div className="md:hidden fixed inset-x-0 bottom-0 z-[60] px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
-      <div className="mx-auto flex max-w-[30rem] items-stretch gap-1 rounded-[28px] border border-[rgba(31,77,67,0.12)] bg-[rgba(251,248,241,0.95)] p-2 shadow-[0_-12px_40px_rgba(31,77,67,0.12)] backdrop-blur-[20px]">
-        {tabs.map((tab) => {
-          const active = pathname === tab.href || pathname.startsWith(`${tab.href}/`)
-          return <TabLink key={tab.href} {...tab} active={active} />
-        })}
-      </div>
-    </div>
+    <>
+      {moreOpen && (
+        <div className="md:hidden fixed inset-0 z-[80]">
+          <button
+            type="button"
+            className="absolute inset-0 bg-[#102b24]/35 backdrop-blur-[2px]"
+            onClick={() => setMoreOpen(false)}
+            aria-label="Menü schließen"
+          />
+          <div className="app-sheet">
+            <div className="mx-auto mb-5 h-1.5 w-10 rounded-full bg-[#c8cfca]" />
+            <div className="mb-5 flex items-start justify-between">
+              <div>
+                <p className="app-kicker">{isInternal ? 'Interner Bereich' : 'Sheridan Quartier'}</p>
+                <h2 className="mb-0 font-sans text-[25px] font-bold leading-[1.1] tracking-[-0.035em]">
+                  {isInternal ? 'Weitere Bereiche' : 'Entdecken'}
+                </h2>
+              </div>
+              <button type="button" onClick={() => setMoreOpen(false)} className="app-header-button" aria-label="Menü schließen">
+                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="m7 7 10 10M17 7 7 17" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="overflow-hidden rounded-[24px] bg-white/80">
+              {(isInternal ? internalMenu : publicMenu).map((item) => (
+                <Link key={item.href} href={item.href} className="flex items-center gap-3 border-b border-[var(--line)] p-4 last:border-0">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#e4ece6] text-[#285849]">
+                    <AppIcon name={item.icon} className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[14px] font-bold tracking-[-0.015em]">{item.title}</span>
+                    {'subtitle' in item && item.subtitle && (
+                      <span className="mt-0.5 block text-[11px] text-[var(--muted)]">{item.subtitle}</span>
+                    )}
+                  </span>
+                  <svg className="h-4 w-4 text-[#8a958e]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="m9 6 6 6-6 6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              ))}
+            </div>
+
+            {isInternal && (
+              <form action="/api/auth/logout" method="POST" className="mt-4">
+                <button type="submit" className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[18px] bg-[#efe4dc] text-[13px] font-bold text-[#914b33]">
+                  <AppIcon name="logout" className="h-[18px] w-[18px]" />
+                  Abmelden
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      <nav className="app-tabbar md:hidden" aria-label="App-Navigation">
+        <div className="mx-auto grid max-w-[31rem] grid-cols-5">
+          {tabs.map((tab) => {
+            const active = tab.action === 'more'
+              ? moreOpen
+              : tab.match === '/'
+                ? pathname === '/'
+                : pathname.startsWith(tab.match || '')
+
+            if (tab.action === 'more') {
+              return (
+                <button
+                  key={tab.label}
+                  type="button"
+                  onClick={() => setMoreOpen(true)}
+                  className="app-tab"
+                  aria-expanded={moreOpen}
+                >
+                  <TabContent label={tab.label} icon={tab.icon} active={active} />
+                </button>
+              )
+            }
+
+            return (
+              <Link key={tab.label} href={tab.href || '/'} className="app-tab">
+                <TabContent label={tab.label} icon={tab.icon} active={active} />
+              </Link>
+            )
+          })}
+        </div>
+      </nav>
+    </>
   )
 }
