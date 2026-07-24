@@ -78,27 +78,28 @@ const bookableRooms = [
 
 export default function RaumbuchungenPage() {
   return (
-    <div className="pt-28 min-h-screen">
+    <div className="min-h-screen pt-24 pb-24 md:pt-28">
       {/* Raumbuchungen */}
-      <section className="section bg-white">
+      <section className="section bg-white py-12 md:py-24">
         <div className="container-custom">
-          <div className="mb-12">
-            <h1 className="mb-4">Raumbuchungen</h1>
-            <p className="text-[21px] text-[#6e6e73] content-width">
-              Buchbare Räume und Unterkünfte im Quartier
+          <div className="section-shell mb-8 md:mb-12">
+            <span className="eyebrow mb-4">Räume & Gäste</span>
+            <h1 className="mb-3 max-w-[12ch]">Buchbare Orte im Quartier.</h1>
+            <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">
+              Verfügbare Räume und Unterkünfte auf dem Handy schnell finden und direkt anfragen.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 md:mb-24">
             {bookableRooms.map((room, idx) => (
-              <div key={idx} className={`border ${room.colorClass} rounded-2xl p-6`}>
+              <div key={idx} className={`rounded-[28px] border ${room.colorClass} bg-[rgba(251,248,241,0.9)] p-5 shadow-[0_18px_40px_rgba(38,82,62,0.06)] md:p-6`}>
                 <div className="mb-4">
-                  <p className="text-[12px] font-medium text-[#6e6e73] mb-1">{room.community}</p>
-                  <h3 className="text-[24px] font-medium text-[#1d1d1f] mb-3">{room.name}</h3>
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6e6e73]">{room.community}</p>
+                  <h3 className="mb-3 text-[24px] font-medium text-[#1d1d1f]">{room.name}</h3>
                   <p className="text-[17px] text-[#6e6e73] leading-[1.7] mb-4">
                     {room.description}
                   </p>
-                  <p className="text-[20px] font-medium text-[#1d1d1f] mb-6">
+                  <p className="mb-6 text-[20px] font-medium text-[#1d1d1f]">
                     {room.price}
                   </p>
                 </div>
@@ -115,11 +116,12 @@ export default function RaumbuchungenPage() {
       </section>
 
       {/* Services nach Gemeinschaft */}
-      <section className="section bg-[#f5f5f7]">
+      <section className="section bg-[#f5f5f7] py-12 md:py-24">
         <div className="container-custom">
           <div className="mb-12">
+            <span className="eyebrow mb-4">Was es außerdem gibt</span>
             <h2 className="mb-4">Gemeinschaftliche Services</h2>
-            <p className="text-[17px] text-[#6e6e73]">
+            <p className="text-[16px] text-[#6e6e73] md:text-[17px]">
               Räume und Angebote der drei Baugemeinschaften
             </p>
           </div>
@@ -127,7 +129,7 @@ export default function RaumbuchungenPage() {
           {/* Sheridan & Junia */}
           <div className="mb-16">
             <h3 className="text-[24px] font-medium mb-6 text-[#1d1d1f]">Sheridan Park & Junia</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
               {services['sheridan-junia'].map((service, idx) => (
                 service.link ? (
                   <Link key={idx} href={service.link} className="card hover:shadow-lg transition-shadow">
@@ -149,7 +151,7 @@ export default function RaumbuchungenPage() {
           {/* wagnisSHARE */}
           <div className="mb-16">
             <h3 className="text-[24px] font-medium mb-6 text-[#1d1d1f]">wagnisSHARE</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
               {services['wagnisshare'].map((service, idx) => (
                 service.link ? (
                   <Link key={idx} href={service.link} className="card hover:shadow-lg transition-shadow">
@@ -171,7 +173,7 @@ export default function RaumbuchungenPage() {
           {/* WOGENAU */}
           <div>
             <h3 className="text-[24px] font-medium mb-6 text-[#1d1d1f]">WOGENAU</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
               {services['wogenau'].map((service, idx) => (
                 service.link ? (
                   <Link key={idx} href={service.link} className="card hover:shadow-lg transition-shadow">
@@ -191,7 +193,7 @@ export default function RaumbuchungenPage() {
           </div>
 
           {/* Info Box */}
-          <div className="mt-12 card bg-white border-l-4 border-[#0071e3]">
+          <div className="mt-12 rounded-[28px] border border-[#0071e3]/16 bg-white px-5 py-5 shadow-[0_18px_40px_rgba(38,82,62,0.06)] md:px-6">
             <h4 className="text-[17px] font-medium mb-2 text-[#1d1d1f]">Hinweis</h4>
             <p className="text-[14px] text-[#6e6e73]">
               Für einige Services ist eine Buchung oder Reservierung erforderlich.

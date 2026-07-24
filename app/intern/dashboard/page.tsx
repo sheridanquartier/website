@@ -155,37 +155,37 @@ export default async function InternDashboardPage() {
   ]
 
   return (
-    <div className="pt-28 pb-20">
-      <section className="section bg-white">
+    <div className="pt-24 pb-24 md:pt-28">
+      <section className="section bg-white py-12 md:py-24">
         <div className="container-custom">
-          <div className="editorial-panel relative overflow-hidden px-6 py-7 md:px-10 md:py-10">
+          <div className="editorial-panel relative overflow-hidden px-5 py-6 md:px-10 md:py-10">
             <div className="relative grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
               <div>
                 <span className="eyebrow mb-5">Interner Bereich</span>
-                <h1 className="mb-5 max-w-[14ch]">Gut ankommen. Schnell etwas erledigen. Sehen, was im Quartier läuft.</h1>
-                <p className="max-w-[620px] text-[18px] leading-[1.75] text-[var(--muted)]">
+                <h1 className="mb-4 max-w-[13ch]">Gut ankommen. Schnell etwas erledigen. Sehen, was läuft.</h1>
+                <p className="max-w-[620px] text-[16px] leading-[1.72] text-[var(--muted)] md:text-[18px] md:leading-[1.75]">
                   Das Dashboard ist Ihr Einstieg in den Alltag der Gemeinschaften:
                   Dinge teilen, Hilfe finden, Termine sehen und ein Gefühl dafür bekommen,
                   was gerade im Quartier in Bewegung ist.
                 </p>
 
-                <div className="mt-8 grid gap-4 md:grid-cols-3">
+                <div className="mt-6 grid grid-cols-3 gap-3 md:mt-8 md:gap-4">
                   <div className="rounded-[24px] border border-[var(--line)] bg-white/72 px-5 py-4">
-                    <div className="text-[28px] font-semibold leading-none text-[#1f4d43]">{activePostsCount}</div>
-                    <div className="mt-2 text-[12px] uppercase tracking-[0.08em] text-[#786f64]">Aktive Brett-Einträge</div>
+                    <div className="text-[24px] font-semibold leading-none text-[#1f4d43] md:text-[28px]">{activePostsCount}</div>
+                    <div className="mt-2 text-[11px] uppercase tracking-[0.04em] text-[#786f64] md:text-[12px] md:tracking-[0.08em]">Brett</div>
                   </div>
                   <div className="rounded-[24px] border border-[var(--line)] bg-white/72 px-5 py-4">
-                    <div className="text-[28px] font-semibold leading-none text-[#1f4d43]">{upcomingEventsCount}</div>
-                    <div className="mt-2 text-[12px] uppercase tracking-[0.08em] text-[#786f64]">Kommende Termine</div>
+                    <div className="text-[24px] font-semibold leading-none text-[#1f4d43] md:text-[28px]">{upcomingEventsCount}</div>
+                    <div className="mt-2 text-[11px] uppercase tracking-[0.04em] text-[#786f64] md:text-[12px] md:tracking-[0.08em]">Termine</div>
                   </div>
                   <div className="rounded-[24px] border border-[var(--line)] bg-white/72 px-5 py-4">
-                    <div className="text-[28px] font-semibold leading-none text-[#1f4d43]">{lendItemsCount}</div>
-                    <div className="mt-2 text-[12px] uppercase tracking-[0.08em] text-[#786f64]">Dinge im Verleihpool</div>
+                    <div className="text-[24px] font-semibold leading-none text-[#1f4d43] md:text-[28px]">{lendItemsCount}</div>
+                    <div className="mt-2 text-[11px] uppercase tracking-[0.04em] text-[#786f64] md:text-[12px] md:tracking-[0.08em]">Verleih</div>
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-[30px] border border-[var(--line)] bg-[linear-gradient(165deg,#1f4d43_0%,#2b6957_100%)] p-6 text-white shadow-[0_26px_60px_rgba(38,82,62,0.18)]">
+              <div className="rounded-[30px] border border-[var(--line)] bg-[linear-gradient(165deg,#1f4d43_0%,#2b6957_100%)] p-5 text-white shadow-[0_26px_60px_rgba(38,82,62,0.18)] md:p-6">
                 <div className="mb-5 text-[12px] font-semibold uppercase tracking-[0.1em] text-[#d7ebdf]">
                   Was möchten Sie heute tun?
                 </div>
@@ -199,7 +199,7 @@ export default async function InternDashboardPage() {
                       <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#c7ded2]">
                         {action.eyebrow}
                       </div>
-                      <div className="mt-2 text-[22px] leading-[1.2] text-white">{action.title}</div>
+                      <div className="mt-2 text-[20px] leading-[1.2] text-white md:text-[22px]">{action.title}</div>
                       <p className="mb-0 mt-3 text-[15px] leading-[1.65] text-[#e1eee7]">{action.description}</p>
                     </Link>
                   ))}
@@ -208,12 +208,12 @@ export default async function InternDashboardPage() {
             </div>
           </div>
 
-          <div className="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="mt-8 grid gap-6 lg:mt-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8">
             <section className="editorial-panel p-6 md:p-8">
-              <div className="mb-7 flex items-end justify-between gap-4">
+              <div className="mb-6 flex flex-col items-start justify-between gap-3 md:mb-7 md:flex-row md:items-end md:gap-4">
                 <div>
                   <span className="eyebrow mb-4">Soziale Orientierung</span>
-                  <h2 className="mb-2 text-[32px]">Gerade auf dem Brett</h2>
+                  <h2 className="mb-2 text-[28px] md:text-[32px]">Gerade auf dem Brett</h2>
                   <p className="mb-0 text-[16px] text-[#665f56]">
                     Die neuesten Angebote, Gesuche und Tauschangebote aus den Gemeinschaften.
                   </p>
@@ -247,7 +247,7 @@ export default async function InternDashboardPage() {
                         </span>
                         <span className="text-[12px] text-[#8b7b6c]">{formatDate(post.created_at)}</span>
                       </div>
-                      <h3 className="mb-2 text-[24px] leading-[1.2]">{post.title}</h3>
+                      <h3 className="mb-2 text-[22px] leading-[1.2] md:text-[24px]">{post.title}</h3>
                       <p className="mb-0 text-[15px] leading-[1.7] text-[#665f56] line-clamp-2">{post.description}</p>
                     </Link>
                   ))}
@@ -257,10 +257,10 @@ export default async function InternDashboardPage() {
 
             <div className="space-y-8">
               <section className="editorial-panel p-6 md:p-8">
-                <div className="mb-6 flex items-end justify-between gap-4">
+                <div className="mb-6 flex flex-col items-start justify-between gap-3 md:flex-row md:items-end md:gap-4">
                   <div>
                     <span className="eyebrow mb-4">Gemeinsam unterwegs</span>
-                    <h2 className="mb-2 text-[32px]">Nächste Termine</h2>
+                    <h2 className="mb-2 text-[28px] md:text-[32px]">Nächste Termine</h2>
                   </div>
                   <Link href="/intern/kalender" className="text-[13px] font-medium uppercase tracking-[0.08em] text-[#b85c38] hover:text-[#9d482a]">
                     Zum Kalender
@@ -293,7 +293,7 @@ export default async function InternDashboardPage() {
 
               <section className="editorial-panel p-6 md:p-8">
                 <span className="eyebrow mb-4">Im Quartier sichtbar</span>
-                <h2 className="mb-4 text-[32px]">Aus den Gemeinschaften</h2>
+                <h2 className="mb-4 text-[28px] md:text-[32px]">Aus den Gemeinschaften</h2>
                 <p className="mb-6 text-[16px] text-[#665f56]">
                   Aktivität aus {activeCommunityIds.length || 0} von {Object.keys(COMMUNITIES).length} Gemeinschaften ist auf dem Dashboard sichtbar.
                 </p>
@@ -338,13 +338,13 @@ export default async function InternDashboardPage() {
           <section className="mt-12">
             <div className="mb-6">
               <span className="eyebrow mb-4">Alles an einem Ort</span>
-              <h2 className="mb-2 text-[32px]">Wichtige Bereiche</h2>
+              <h2 className="mb-2 text-[28px] md:text-[32px]">Wichtige Bereiche</h2>
               <p className="mb-0 text-[16px] text-[#665f56]">
                 Wenn Sie etwas Bestimmtes erledigen möchten, kommen Sie von hier direkt in die passenden Bereiche.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 xl:grid-cols-5">
               {serviceLinks.map((item) => (
                 <Link
                   key={item.href}

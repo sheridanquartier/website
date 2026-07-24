@@ -236,20 +236,35 @@ export default function SchwarzesBrettPage() {
   }
 
   return (
-    <div className="pt-28 pb-16">
-      <div className="container-custom">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-2">Schwarzes Brett</h1>
-            <p className="text-gray-600">Angebote, Gesuche und Tauschangebote aus dem Quartier</p>
+    <div className="pt-24 pb-24 md:pt-28">
+      <div className="container-custom space-y-6 md:space-y-8">
+        <div className="section-shell">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="eyebrow mb-4">Teilen & Finden</span>
+              <h1 className="mb-3 max-w-[12ch]">Schwarzes Brett im Quartier.</h1>
+              <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">
+                Angebote, Gesuche und Tauschangebote schnell durchsuchen oder direkt selbst einstellen.
+              </p>
+            </div>
+            <button onClick={openCreateModal} className="btn-primary w-full md:w-auto">
+              + Neuer Eintrag
+            </button>
           </div>
-          <button onClick={openCreateModal} className="btn-primary w-full md:w-auto">
-            + Neuer Eintrag
-          </button>
         </div>
 
-        <div className="card mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="editorial-panel p-4 md:p-6">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <div>
+              <div className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+                Filter
+              </div>
+              <p className="mb-0 text-[14px] text-[var(--muted)]">
+                {loading ? 'Lädt Einträge…' : `${posts.length} aktive Einträge`}
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
               <label className="block text-sm font-medium mb-2">Art</label>
               <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="input">
@@ -287,7 +302,7 @@ export default function SchwarzesBrettPage() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
             {posts.map((post) => (
               <div key={post.id} className="space-y-3">
                 <PostCard
@@ -305,7 +320,7 @@ export default function SchwarzesBrettPage() {
                   imageUrl={post.image_url}
                 />
                 {ownedPostIds.includes(post.id) && (
-                  <div className="flex gap-3">
+                  <div className="grid grid-cols-2 gap-3">
                     <button onClick={() => openEditModal(post)} className="btn-secondary flex-1 text-sm">
                       Bearbeiten
                     </button>
@@ -414,7 +429,7 @@ export default function SchwarzesBrettPage() {
               </div>
             </div>
 
-            <div className="flex gap-3 pt-4">
+            <div className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-[1fr_auto]">
               <button type="submit" className="btn-primary flex-1">
                 {editingPost ? 'Aktualisieren' : 'Erstellen'}
               </button>
@@ -426,7 +441,7 @@ export default function SchwarzesBrettPage() {
         </Modal>
 
         {formSuccess && (
-          <div className="fixed bottom-6 right-6 z-50 rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-[14px] text-[var(--ink)] shadow-[0_16px_36px_rgba(38,82,62,0.12)]">
+          <div className="fixed bottom-[calc(6.25rem+env(safe-area-inset-bottom))] left-4 right-4 z-50 rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-[14px] text-[var(--ink)] shadow-[0_16px_36px_rgba(38,82,62,0.12)] md:bottom-6 md:left-auto md:right-6">
             {formSuccess}
           </div>
         )}

@@ -28,14 +28,19 @@ export default async function KalenderPage() {
   }
 
   return (
-    <div className="pt-28">
-      <div className="container-custom">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Kalender</h1>
-          <p className="text-gray-600">Kommende Events und Termine im Quartier</p>
+    <div className="pt-24 pb-24 md:pt-28">
+      <div className="container-custom space-y-6 md:space-y-8">
+        <div className="section-shell">
+          <span className="eyebrow mb-4">Gemeinsam planen</span>
+          <h1 className="mb-3 max-w-[12ch]">Termine im Quartier auf einen Blick.</h1>
+          <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">
+            Sehen, was in den Gemeinschaften ansteht, und zwischen Listen- und Monatsansicht wechseln.
+          </p>
         </div>
 
-        <CalendarView events={events || []} viewMode="list" />
+        <div className="editorial-panel p-4 md:p-6">
+          <CalendarView events={events || []} viewMode="list" />
+        </div>
       </div>
     </div>
   )

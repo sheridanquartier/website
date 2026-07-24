@@ -74,13 +74,13 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
   }
 
   return (
-    <div>
+    <div className="space-y-5">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center justify-between gap-3 rounded-[22px] border border-[var(--line)] bg-white/80 px-3 py-2 sm:justify-start">
           <button
             onClick={() => setCurrentDate(subMonths(currentDate, 1))}
-            className="p-2 hover:bg-gray-100 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-[var(--ink)] transition-colors hover:bg-[rgba(31,77,67,0.06)]"
             aria-label="Vorheriger Monat"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,13 +88,13 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
             </svg>
           </button>
 
-          <h2 className="text-xl sm:text-2xl font-bold">
+          <h2 className="mb-0 text-[20px] font-semibold sm:text-[28px]">
             {format(currentDate, 'MMMM yyyy', { locale: de })}
           </h2>
 
           <button
             onClick={() => setCurrentDate(addMonths(currentDate, 1))}
-            className="p-2 hover:bg-gray-100 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-[var(--ink)] transition-colors hover:bg-[rgba(31,77,67,0.06)]"
             aria-label="Nächster Monat"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,23 +104,23 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
         </div>
 
         {/* View Toggle */}
-        <div className="flex gap-2 w-full sm:w-auto">
+        <div className="flex gap-2 rounded-[20px] border border-[var(--line)] bg-white/72 p-1 w-full sm:w-auto">
           <button
             onClick={() => setViewMode('list')}
-            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg font-medium transition-colors min-h-[44px] ${
+            className={`min-h-[44px] flex-1 rounded-[16px] px-4 py-2 text-[14px] font-medium transition-colors sm:flex-none ${
               viewMode === 'list'
-                ? 'bg-sheridan-blue text-white'
-                : 'bg-gray-200 text-anthracite hover:bg-gray-300'
+                ? 'bg-[var(--surface-deep)] text-white'
+                : 'text-[var(--ink)] hover:bg-[rgba(31,77,67,0.06)]'
             }`}
           >
             Liste
           </button>
           <button
             onClick={() => setViewMode('month')}
-            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg font-medium transition-colors min-h-[44px] ${
+            className={`min-h-[44px] flex-1 rounded-[16px] px-4 py-2 text-[14px] font-medium transition-colors sm:flex-none ${
               viewMode === 'month'
-                ? 'bg-sheridan-blue text-white'
-                : 'bg-gray-200 text-anthracite hover:bg-gray-300'
+                ? 'bg-[var(--surface-deep)] text-white'
+                : 'text-[var(--ink)] hover:bg-[rgba(31,77,67,0.06)]'
             }`}
           >
             Monat
@@ -142,7 +142,7 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
 
               return (
                 <div key={dateKey}>
-                  <h3 className="text-lg font-semibold mb-3 text-sheridan-blue">
+                  <h3 className="mb-3 text-[17px] font-semibold text-[var(--surface-deep)] md:text-lg">
                     {format(date, 'EEEE, d. MMMM yyyy', { locale: de })}
                   </h3>
                   <div className="space-y-3">
@@ -168,11 +168,11 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
 
       {/* Monatsansicht */}
       {viewMode === 'month' && (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="overflow-hidden rounded-[24px] border border-[var(--line)] bg-white shadow-[0_18px_40px_rgba(38,82,62,0.06)]">
           {/* Wochentage Header */}
-          <div className="grid grid-cols-7 bg-gray-100 border-b">
+          <div className="grid grid-cols-7 border-b bg-[rgba(31,77,67,0.05)]">
             {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(day => (
-              <div key={day} className="text-center py-2 text-sm font-semibold text-gray-600">
+              <div key={day} className="py-2 text-center text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)] sm:text-sm">
                 {day}
               </div>
             ))}
@@ -189,22 +189,22 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
                 return (
                   <div
                     key={dayIdx}
-                    className={`min-h-[80px] sm:min-h-[100px] p-1 sm:p-2 border-r last:border-r-0 ${
-                      !isCurrentMonth ? 'bg-gray-50' : ''
-                    } ${isToday ? 'bg-blue-50' : ''}`}
+                    className={`min-h-[86px] border-r p-1.5 last:border-r-0 sm:min-h-[100px] sm:p-2 ${
+                      !isCurrentMonth ? 'bg-[rgba(31,77,67,0.03)]' : ''
+                    } ${isToday ? 'bg-[rgba(197,104,66,0.08)]' : ''}`}
                   >
-                    <div className={`text-sm font-semibold mb-1 ${!isCurrentMonth ? 'text-gray-400' : ''}`}>
+                    <div className={`mb-1 text-sm font-semibold ${!isCurrentMonth ? 'text-gray-400' : ''}`}>
                       {format(day, dateFormat)}
                     </div>
                     <div className="space-y-1">
                       {dayEvents.slice(0, 2).map(event => (
                         <div
                           key={event.id}
-                          className={`text-xs p-1 rounded truncate ${
+                          className={`truncate rounded px-1.5 py-1 text-[10px] text-white sm:text-xs ${
                             event.community === 'sheridan-junia' ? 'bg-sheridan-blue' :
                             event.community === 'wagnisshare' ? 'bg-wagnis-orange' :
                             'bg-wogenau-green'
-                          } text-white`}
+                          }`}
                           title={event.title}
                         >
                           {event.title}
