@@ -41,24 +41,27 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
       />
 
       {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div className={`relative bg-white rounded-[18px] border border-[#d2d2d7] shadow-sm w-full ${sizeClasses[size]} ${size === 'full' ? 'flex flex-col' : ''}`}>
+      <div className="flex min-h-full items-end justify-center p-0 md:items-center md:p-4">
+        <div className={`relative flex w-full flex-col border border-[#d2d2d7] bg-white shadow-sm ${sizeClasses[size]} rounded-t-[28px] md:rounded-[24px] ${size === 'full' ? 'h-[calc(100vh-1rem)] md:h-[calc(100vh-2rem)]' : 'max-h-[88svh] md:max-h-[calc(100vh-2rem)]'} ${size === 'full' ? 'md:flex-col' : ''}`}>
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-[#d2d2d7]">
-            <h2 className="text-[24px] font-medium mb-0 text-[#1d1d1f]">{title}</h2>
+          <div className="sticky top-0 z-10 border-b border-[#d2d2d7] bg-white/96 px-4 pb-4 pt-3 backdrop-blur md:px-6 md:py-5">
+            <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#d2d2d7] md:hidden" />
+            <div className="flex items-center justify-between gap-4">
+            <h2 className="mb-0 text-[20px] font-medium text-[#1d1d1f] md:text-[24px]">{title}</h2>
             <button
               onClick={onClose}
-              className="text-[#6e6e73] hover:text-[#1d1d1f] transition-colors p-2 -mr-2"
+              className="-mr-2 rounded-full p-2 text-[#6e6e73] transition-colors hover:bg-[rgba(31,77,67,0.06)] hover:text-[#1d1d1f]"
               aria-label="Schließen"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
+            </div>
           </div>
 
           {/* Content */}
-          <div className={`p-6 ${size === 'full' ? 'flex-1 overflow-y-auto' : ''}`}>
+          <div className={`flex-1 overflow-y-auto px-4 pb-[calc(1.25rem+env(safe-area-inset-bottom))] pt-4 md:px-6 md:pb-6 md:pt-5 ${size === 'full' ? 'flex-1' : ''}`}>
             {children}
           </div>
         </div>

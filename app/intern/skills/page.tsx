@@ -264,7 +264,7 @@ export default function SkillsPage() {
                   createdAt={skill.created_at}
                 />
                 {ownedTradeIds.includes(skill.id) && (
-                  <div className="flex gap-3">
+                  <div className="grid grid-cols-2 gap-3">
                     <button onClick={() => openEditModal(skill)} className="btn-secondary flex-1 text-sm">
                       Bearbeiten
                     </button>
@@ -356,7 +356,7 @@ export default function SkillsPage() {
               </div>
             </div>
 
-            <div className="flex gap-3 pt-4">
+            <div className="grid grid-cols-1 gap-3 pt-4 sm:grid-cols-[1fr_auto]">
               <button type="submit" className="btn-primary flex-1">
                 {editingSkill ? 'Aktualisieren' : 'Erstellen'}
               </button>
@@ -368,7 +368,7 @@ export default function SkillsPage() {
         </Modal>
 
         {formSuccess && (
-          <div className="fixed bottom-6 right-6 z-50 rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-[14px] text-[var(--ink)] shadow-[0_16px_36px_rgba(38,82,62,0.12)]">
+          <div className="fixed bottom-[calc(6.25rem+env(safe-area-inset-bottom))] left-4 right-4 z-50 rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-[14px] text-[var(--ink)] shadow-[0_16px_36px_rgba(38,82,62,0.12)] md:bottom-6 md:left-auto md:right-6">
             {formSuccess}
           </div>
         )}

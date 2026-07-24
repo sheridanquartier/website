@@ -34,60 +34,69 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen px-6 pt-20 pb-12">
+    <div className="min-h-screen px-4 pb-24 pt-20 md:px-6 md:pb-12">
       <div className="container-custom max-w-5xl">
-        <div className="section-shell">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="section-shell overflow-hidden">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-8">
             <div>
               <span className="eyebrow mb-5">Für Bewohnerinnen und Bewohner</span>
               <h1 className="max-w-[10ch]">Interner Bereich</h1>
-              <p className="max-w-[46ch] text-[17px] leading-[1.8] text-[var(--muted)]">
+              <p className="max-w-[46ch] text-[16px] leading-[1.75] text-[var(--muted)] md:text-[17px] md:leading-[1.8]">
                 Schwarzes Brett, Skills, Verleihpool, Kalender und Raumbuchungen an einem Ort.
                 Das gemeinsame Passwort ist nur für Bewohner gedacht.
               </p>
             </div>
 
-            <div className="editorial-panel p-6 md:p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="password" className="block text-[14px] font-medium mb-2 text-[#1d1d1f]">
-                Passwort
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input"
-                placeholder="Passwort eingeben"
-                required
-                autoFocus
-              />
-              <p className="mt-2 text-[13px] text-[var(--muted)]">
-                Wenn Sie das Passwort nicht kennen, wenden Sie sich bitte an Ihre Hausgemeinschaft.
-              </p>
-            </div>
-
-            {error && (
-              <div className="bg-[#ff3b30]/10 border border-[#ff3b30] text-[#ff3b30] px-4 py-3 rounded-xl text-[14px]">
-                {error}
+            <div className="editorial-panel p-4 md:p-8">
+              <div className="mb-5 rounded-[24px] border border-[var(--line)] bg-white/74 px-4 py-4 md:hidden">
+                <p className="mb-1 text-[12px] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">
+                  App-Zugang
+                </p>
+                <p className="mb-0 text-[14px] leading-[1.55] text-[var(--ink)]">
+                  Mit dem Passwort öffnen Sie alle internen Bereiche direkt auf dem Handy.
+                </p>
               </div>
-            )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full"
-            >
-              {loading ? 'Wird geprüft...' : 'Anmelden'}
-            </button>
-          </form>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label htmlFor="password" className="mb-2 block text-[13px] font-semibold uppercase tracking-[0.06em] text-[#1d1d1f]">
+                    Passwort
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="input min-h-[56px] rounded-[20px] text-[17px]"
+                    placeholder="Passwort eingeben"
+                    required
+                    autoFocus
+                  />
+                  <p className="mt-2 text-[13px] text-[var(--muted)]">
+                    Wenn Sie das Passwort nicht kennen, wenden Sie sich bitte an Ihre Hausgemeinschaft.
+                  </p>
+                </div>
 
-          <div className="mt-8 pt-6 border-t border-[#d2d2d7] text-center">
-            <p className="text-[14px] text-[#6e6e73]">
-              Nur für den internen Bewohnerbereich. Der Projekt-Admin meldet sich separat im Admin-Bereich an.
-            </p>
-          </div>
+                {error && (
+                  <div className="rounded-[20px] border border-[#ff3b30] bg-[#ff3b30]/10 px-4 py-3 text-[14px] text-[#ff3b30]">
+                    {error}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn-primary w-full min-h-[56px] rounded-[20px] text-[15px]"
+                >
+                  {loading ? 'Wird geprüft...' : 'Anmelden'}
+                </button>
+              </form>
+
+              <div className="mt-6 border-t border-[#d2d2d7] pt-5 text-left md:mt-8 md:pt-6 md:text-center">
+                <p className="mb-0 text-[13px] leading-[1.6] text-[#6e6e73] md:text-[14px]">
+                  Nur für den internen Bewohnerbereich. Der Projekt-Admin meldet sich separat im Admin-Bereich an.
+                </p>
+              </div>
             </div>
           </div>
         </div>
