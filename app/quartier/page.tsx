@@ -4,6 +4,12 @@ const mapUrl = 'https://www.google.com/maps/d/embed?mid=1Dz434-txDg-1hLHDC7vnuVM
 const sharedMapUrl =
   'https://www.google.com/maps/d/edit?mid=1Dz434-txDg-1hLHDC7vnuVMrJMy6gJY&usp=sharing'
 
+const projectLegend = [
+  { name: 'Sheridan Park & Junia', color: '#2f6fd6', colorName: 'Blau' },
+  { name: 'wagnisSHARE', color: '#d34a42', colorName: 'Rot' },
+  { name: 'WOGENAU', color: '#3a8b55', colorName: 'Grün' },
+]
+
 export default function QuartierPage() {
   return (
     <>
@@ -44,10 +50,22 @@ export default function QuartierPage() {
         </section>
 
         <section className="mt-7 px-4">
-          <p className="app-kicker">Auf der Karte</p>
+          <p className="app-kicker">Kartenlegende</p>
           <div className="mt-3 overflow-hidden rounded-[24px] bg-white/[0.78]">
+            {projectLegend.map((project) => (
+              <div key={project.name} className="flex items-center gap-3 border-b border-[var(--line)] p-4">
+                <span
+                  className="h-10 w-10 shrink-0 rounded-[14px] border-4 border-white shadow-sm"
+                  style={{ backgroundColor: project.color }}
+                  aria-hidden="true"
+                />
+                <span>
+                  <span className="block text-[14px] font-bold">{project.name}</span>
+                  <span className="mt-0.5 block text-[11px] text-[var(--muted)]">{project.colorName} markiert</span>
+                </span>
+              </div>
+            ))}
             {[
-              ['3', 'Wohnprojekte', 'farblich hervorgehoben'],
               ['A', 'Gästeappartements', 'für Besuch im Quartier'],
               ['R', 'Gemeinschaftsräume', 'für Begegnung und Termine'],
             ].map(([mark, title, detail]) => (
@@ -61,6 +79,18 @@ export default function QuartierPage() {
                 </span>
               </div>
             ))}
+          </div>
+
+          <div className="mt-3 flex items-start gap-3 rounded-[22px] bg-[#e3ece5] p-4">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[#285849]">
+              <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 21s6-4.2 6-10a6 6 0 1 0-12 0c0 5.8 6 10 6 10Z" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="12" cy="11" r="2.3" strokeWidth="1.8" />
+              </svg>
+            </span>
+            <p className="mb-0 text-[12px] leading-[1.55] text-[#345b4f]">
+              Tippe auf einen Pin in der Karte, um weitere Informationen zum jeweiligen Ort zu erhalten.
+            </p>
           </div>
         </section>
       </div>
@@ -103,15 +133,26 @@ export default function QuartierPage() {
             <div className="editorial-panel p-6 md:p-8">
               <span className="eyebrow mb-4">Was die Karte zeigt</span>
               <div className="grid gap-4 md:grid-cols-3">
-                <div className="rounded-[24px] border border-[var(--line)] bg-white/72 px-5 py-5">
+                <div className="rounded-[24px] border border-[var(--line)] bg-white/[0.72] px-5 py-5">
                   <div className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#8b7b6c]">
-                    Projekte
+                    Farben der Projekte
                   </div>
-                  <p className="mb-0 mt-3 text-[15px] leading-[1.7] text-[#4f5b54]">
-                    Sheridan Park & Junia, wagnisSHARE und WOGENAU sind farblich hervorgehoben.
-                  </p>
+                  <div className="mt-4 space-y-3">
+                    {projectLegend.map((project) => (
+                      <div key={project.name} className="flex items-center gap-3">
+                        <span
+                          className="h-3.5 w-3.5 shrink-0 rounded-full ring-4 ring-white"
+                          style={{ backgroundColor: project.color }}
+                          aria-hidden="true"
+                        />
+                        <span className="text-[14px] text-[#4f5b54]">
+                          <strong className="font-semibold text-[var(--ink)]">{project.colorName}:</strong> {project.name}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="rounded-[24px] border border-[var(--line)] bg-white/72 px-5 py-5">
+                <div className="rounded-[24px] border border-[var(--line)] bg-white/[0.72] px-5 py-5">
                   <div className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#8b7b6c]">
                     Gästeappartements
                   </div>
@@ -119,7 +160,7 @@ export default function QuartierPage() {
                     Unterkünfte im Quartier lassen sich räumlich schneller zuordnen.
                   </p>
                 </div>
-                <div className="rounded-[24px] border border-[var(--line)] bg-white/72 px-5 py-5">
+                <div className="rounded-[24px] border border-[var(--line)] bg-white/[0.72] px-5 py-5">
                   <div className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#8b7b6c]">
                     Gemeinschaftsräume
                   </div>
@@ -127,6 +168,14 @@ export default function QuartierPage() {
                     Gemeinsame Orte werden sichtbar und erleichtern die Orientierung vor Ort.
                   </p>
                 </div>
+              </div>
+
+              <div className="mt-5 flex items-center gap-3 rounded-[22px] bg-[#e3ece5] px-5 py-4 text-[14px] leading-[1.6] text-[#345b4f]">
+                <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M12 21s6-4.2 6-10a6 6 0 1 0-12 0c0 5.8 6 10 6 10Z" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="11" r="2.3" strokeWidth="1.8" />
+                </svg>
+                Klicke auf einen Pin in der Karte, um weitere Informationen zum jeweiligen Ort zu erhalten.
               </div>
             </div>
 
