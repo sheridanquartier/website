@@ -7,6 +7,8 @@ import Modal from '@/components/Modal'
 import ImageUpload from '@/components/ImageUpload'
 import { uploadInternalImage } from '@/lib/utils/imageUpload'
 import { COMMUNITIES, type CommunityId } from '@/lib/constants'
+import AppListSkeleton from '@/components/AppListSkeleton'
+import AppEmptyState from '@/components/AppEmptyState'
 
 interface Skill {
   id: string
@@ -232,20 +234,16 @@ export default function SkillsPage() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12"><p className="text-gray-500">Lädt...</p></div>
+          <AppListSkeleton count={3} />
         ) : skills.length === 0 ? (
-          <div className="card text-center py-12">
-            <p className="text-gray-700">Für diese Auswahl gibt es aktuell keine Skills.</p>
-            <p className="mt-2 text-sm text-gray-500">Erstellen Sie einen neuen Eintrag oder zeigen Sie wieder alle Gemeinschaften an.</p>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <button onClick={() => setCommunityFilter('alle')} className="btn-secondary">
-                Filter zurücksetzen
-              </button>
-              <button onClick={() => { resetForm(); setIsModalOpen(true) }} className="btn-primary">
-                Ersten Skill erstellen
-              </button>
-            </div>
-          </div>
+          <AppEmptyState
+            title="Noch keine passenden Skills"
+            description="Für diese Auswahl ist gerade nichts eingetragen. Sie können alle Gemeinschaften anzeigen oder direkt einen neuen Skill anlegen."
+            secondaryLabel="Filter zurücksetzen"
+            onSecondary={() => setCommunityFilter('alle')}
+            primaryLabel="Ersten Skill erstellen"
+            onPrimary={() => { resetForm(); setIsModalOpen(true) }}
+          />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skill) => (

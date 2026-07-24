@@ -360,44 +360,44 @@ export default function Navigation({ isLoggedIn = false }: NavigationProps) {
             </div>
 
             {/* Mobile: horizontal scrollbar */}
-            <div className="md:hidden flex items-center h-full overflow-x-auto whitespace-nowrap gap-6 px-6">
+            <div className="scrollbar-none md:hidden flex h-full items-center gap-6 overflow-x-auto overscroll-x-contain whitespace-nowrap px-6 snap-x snap-mandatory">
               <Link
                 href="/intern/dashboard"
-                className={`text-[14px] transition-colors ${isActive('/intern/dashboard') && pathname === '/intern/dashboard' ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
+                className={`snap-start text-[14px] transition-colors ${isActive('/intern/dashboard') && pathname === '/intern/dashboard' ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
                 Dashboard
               </Link>
               <Link
                 href="/intern/schwarzes-brett"
-                className={`text-[14px] transition-colors ${isActive('/intern/schwarzes-brett') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
+                className={`snap-start text-[14px] transition-colors ${isActive('/intern/schwarzes-brett') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
                 Schwarzes Brett
               </Link>
               <Link
                 href="/intern/skills"
-                className={`text-[14px] transition-colors ${isActive('/intern/skills') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
+                className={`snap-start text-[14px] transition-colors ${isActive('/intern/skills') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
                 Skills
               </Link>
               <Link
                 href="/intern/verleihpool"
-                className={`text-[14px] transition-colors ${isActive('/intern/verleihpool') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
+                className={`snap-start text-[14px] transition-colors ${isActive('/intern/verleihpool') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
                 Verleihpool
               </Link>
               <Link
                 href="/intern/kalender"
-                className={`text-[14px] transition-colors ${isActive('/intern/kalender') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
+                className={`snap-start text-[14px] transition-colors ${isActive('/intern/kalender') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
                 Kalender
               </Link>
               <Link
                 href="/intern/raumbuchungen"
-                className={`text-[14px] transition-colors ${isActive('/intern/raumbuchungen') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
+                className={`snap-start text-[14px] transition-colors ${isActive('/intern/raumbuchungen') ? 'text-[var(--surface-deep)]' : 'text-[var(--ink)]'}`}
               >
                 Raumbuchungen
               </Link>
-              <form action="/api/auth/logout" method="POST" className="inline">
+              <form action="/api/auth/logout" method="POST" className="inline snap-start">
                 <button type="submit" className="text-[12px] text-[var(--muted)]">
                   Abmelden
                 </button>

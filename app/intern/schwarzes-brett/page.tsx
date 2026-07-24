@@ -7,6 +7,8 @@ import Modal from '@/components/Modal'
 import ImageUpload from '@/components/ImageUpload'
 import { uploadInternalImage } from '@/lib/utils/imageUpload'
 import { COMMUNITIES, CATEGORIES, type CommunityId } from '@/lib/constants'
+import AppListSkeleton from '@/components/AppListSkeleton'
+import AppEmptyState from '@/components/AppEmptyState'
 
 interface Post {
   id: string
@@ -287,20 +289,16 @@ export default function SchwarzesBrettPage() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12"><p className="text-gray-500">Lädt...</p></div>
+          <AppListSkeleton count={3} />
         ) : posts.length === 0 ? (
-          <div className="card text-center py-12">
-            <p className="text-gray-700">Für diese Auswahl gibt es aktuell keine Einträge.</p>
-            <p className="text-sm text-gray-500 mt-2">Sie können die Filter zurücksetzen oder direkt einen neuen Eintrag erstellen.</p>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <button onClick={() => { setTypeFilter('alle'); setCommunityFilter('alle') }} className="btn-secondary">
-                Filter zurücksetzen
-              </button>
-              <button onClick={openCreateModal} className="btn-primary">
-                Ersten Eintrag erstellen
-              </button>
-            </div>
-          </div>
+          <AppEmptyState
+            title="Noch keine passenden Einträge"
+            description="Für diese Auswahl ist gerade nichts aktiv. Sie können die Filter zurücksetzen oder direkt selbst etwas einstellen."
+            secondaryLabel="Filter zurücksetzen"
+            onSecondary={() => { setTypeFilter('alle'); setCommunityFilter('alle') }}
+            primaryLabel="Ersten Eintrag erstellen"
+            onPrimary={openCreateModal}
+          />
         ) : (
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
             {posts.map((post) => (

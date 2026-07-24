@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import LendItemCard from '@/components/LendItemCard'
 import type { CommunityId } from '@/lib/constants'
+import AppEmptyState from '@/components/AppEmptyState'
 
 interface LendItem {
   id: string
@@ -28,24 +29,24 @@ export default async function VerleihpoolPage() {
   }
 
   return (
-    <div className="pt-28 min-h-screen">
-      <section className="section bg-white">
+    <div className="min-h-screen pt-24 pb-24 md:pt-28">
+      <section className="section bg-white py-12 md:py-24">
         <div className="container-custom">
-          <div className="mb-12">
-            <h1 className="mb-4">Verleihpool</h1>
-            <p className="text-[21px] text-[#6e6e73] content-width">
-              Gegenstände aus den drei Gemeinschaften zum Ausleihen
+          <div className="section-shell mb-8 md:mb-12">
+            <span className="eyebrow mb-4">Teilen statt doppelt kaufen</span>
+            <h1 className="mb-3 max-w-[11ch]">Verleihpool im Quartier.</h1>
+            <p className="mb-0 max-w-[38rem] text-[16px] leading-[1.7] text-[var(--muted)] md:text-[18px]">
+              Werkzeuge, Haushaltsgeräte und andere Dinge aus den Gemeinschaften direkt auf dem Handy durchsuchen.
             </p>
           </div>
 
           {!items || items.length === 0 ? (
-            <div className="card text-center py-16">
-              <p className="text-[17px] text-[#6e6e73]">
-                Noch keine Artikel im Verleihpool.
-              </p>
-            </div>
+            <AppEmptyState
+              title="Noch keine Dinge im Verleihpool"
+              description="Sobald Gegenstände freigegeben werden, erscheinen sie hier gesammelt für das ganze Quartier."
+            />
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
               {items.map((item: LendItem) => (
                 <LendItemCard
                   key={item.id}

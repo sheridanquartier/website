@@ -265,6 +265,15 @@ html[data-display-mode="standalone"] body {
     linear-gradient(180deg, #f7f4ee 0%, var(--page-bg) 26%, #f2f6f0 100%);
 }
 
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .section {
     @apply py-16;
