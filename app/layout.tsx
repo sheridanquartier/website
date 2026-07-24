@@ -5,6 +5,8 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { verifyCookie } from '@/lib/auth/cookies'
+import PwaClient from '@/components/PwaClient'
+import MobileTabBar from '@/components/MobileTabBar'
 
 const bodyFont = Manrope({
   subsets: ['latin'],
@@ -20,6 +22,22 @@ const displayFont = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: 'Sheridan Quartier',
   description: 'Drei Gemeinschaften im Sheridanpark. Eine ruhige, gemeinsame Plattform für Neuigkeiten, Orientierung und Alltag im Quartier.',
+  applicationName: 'Sheridan Quartier',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Sheridan Quartier',
+  },
+  formatDetection: {
+    telephone: false,
+  },
+}
+
+export const viewport = {
+  themeColor: '#edf3ec',
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover' as const,
 }
 
 export default async function RootLayout({
@@ -35,10 +53,12 @@ export default async function RootLayout({
   return (
     <html lang="de">
       <body className={`${bodyFont.variable} ${displayFont.variable} antialiased`}>
+        <PwaClient />
         <Navigation isLoggedIn={isLoggedIn} />
-        <main className="min-h-screen">
+        <main className="min-h-screen pb-[calc(6rem+env(safe-area-inset-bottom))] md:pb-0">
           {children}
         </main>
+        <MobileTabBar isLoggedIn={isLoggedIn} />
         <Footer />
       </body>
     </html>

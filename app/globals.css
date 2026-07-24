@@ -20,6 +20,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    background: #edf3ec;
   }
 
   body {
@@ -28,6 +29,8 @@
       linear-gradient(180deg, #f7f4ee 0%, var(--page-bg) 32%, #f2f6f0 100%);
     color: var(--ink);
     font-family: var(--body-font);
+    min-height: 100svh;
+    overscroll-behavior-y: none;
   }
 
   h1,
@@ -71,6 +74,10 @@
 
     h3 {
       @apply text-[23px] leading-[1.16];
+    }
+
+    body {
+      -webkit-tap-highlight-color: transparent;
     }
   }
 }
@@ -252,6 +259,12 @@
   }
 }
 
+html[data-display-mode="standalone"] body {
+  background:
+    radial-gradient(circle at top, rgba(221, 168, 105, 0.08), transparent 28%),
+    linear-gradient(180deg, #f7f4ee 0%, var(--page-bg) 26%, #f2f6f0 100%);
+}
+
 @media (max-width: 768px) {
   .section {
     @apply py-16;
@@ -263,6 +276,10 @@
 
   .editorial-panel {
     @apply rounded-[28px];
+  }
+
+  main {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom));
   }
 }
 
