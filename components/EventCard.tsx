@@ -23,27 +23,27 @@ export default function EventCard({
 }: EventCardProps) {
   if (compact) {
     return (
-      <div className="card">
+      <div className="rounded-[24px] border border-[var(--line)] bg-white/86 p-4 shadow-[0_16px_34px_rgba(38,82,62,0.06)] md:p-5">
         <div className="flex items-start gap-4">
-          <div className="text-center min-w-[60px] flex-shrink-0">
-            <div className="text-[28px] font-semibold text-[#0071e3] leading-none">
+          <div className="min-w-[60px] shrink-0 rounded-[18px] bg-[rgba(31,77,67,0.06)] px-2 py-3 text-center">
+            <div className="text-[26px] font-semibold leading-none text-[var(--surface-deep)]">
               {formatDate(startsAt, 'dd')}
             </div>
-            <div className="text-[14px] text-[#6e6e73] mt-1">
+            <div className="mt-1 text-[12px] font-semibold uppercase tracking-[0.05em] text-[#6e6e73]">
               {formatDate(startsAt, 'MMM')}
             </div>
           </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <h4 className="font-medium text-[17px] text-[#1d1d1f]">{title}</h4>
+          <div className="min-w-0 flex-1">
+            <div className="mb-2 flex flex-wrap items-center gap-2">
+              <h4 className="text-[17px] font-medium leading-[1.35] text-[#1d1d1f]">{title}</h4>
               <CommunityBadge community={community} size="sm" />
             </div>
-            <p className="text-[14px] text-[#6e6e73]">
+            <p className="mb-1 text-[14px] text-[#6e6e73]">
               {formatTime(startsAt)} Uhr
               {endsAt && ` - ${formatTime(endsAt)} Uhr`}
             </p>
             {location && (
-              <p className="text-[14px] text-[#6e6e73]">{location}</p>
+              <p className="mb-0 text-[14px] text-[#6e6e73]">{location}</p>
             )}
           </div>
         </div>
@@ -52,24 +52,24 @@ export default function EventCard({
   }
 
   return (
-    <div className="card">
-      <div className="flex items-start justify-between mb-3 flex-wrap gap-2">
+    <div className="rounded-[28px] border border-[var(--line)] bg-[linear-gradient(180deg,rgba(251,248,241,0.98)_0%,rgba(247,241,232,0.94)_100%)] p-5 shadow-[0_18px_42px_rgba(38,82,62,0.08)] md:p-6">
+      <div className="mb-4 flex items-start justify-between gap-3 flex-wrap">
         <CommunityBadge community={community} />
-        <div className="text-right">
-          <div className="font-medium text-[#0071e3] text-[17px]">
+        <div className="rounded-[18px] bg-[rgba(31,77,67,0.06)] px-3 py-2 text-right">
+          <div className="text-[16px] font-semibold text-[var(--surface-deep)]">
             {formatDate(startsAt, 'dd.MM.yyyy')}
           </div>
-          <div className="text-[14px] text-[#6e6e73]">
+          <div className="text-[13px] text-[#6e6e73]">
             {formatTime(startsAt)}
             {endsAt && ` - ${formatTime(endsAt)}`} Uhr
           </div>
         </div>
       </div>
 
-      <h3 className="text-[20px] font-medium mb-2 text-[#1d1d1f]">{title}</h3>
+      <h3 className="mb-2 text-[21px] font-medium leading-[1.3] text-[#1d1d1f] md:text-[22px]">{title}</h3>
 
       {description && (
-        <p className="text-[17px] text-[#6e6e73] leading-[1.7] mb-3">{description}</p>
+        <p className="mb-3 text-[15px] leading-[1.7] text-[#6e6e73] md:text-[16px]">{description}</p>
       )}
 
       {location && (
