@@ -3,12 +3,9 @@ import AppIcon from '@/components/AppIcon'
 import CommunityBadge from '@/components/CommunityBadge'
 import type { CommunityId } from '@/lib/constants'
 
-type SpaceIcon = 'rooms' | 'home' | 'skills' | 'people'
-
 interface SharedSpace {
   name: string
   description: string
-  icon: SpaceIcon
   link?: string
   price?: string
 }
@@ -27,31 +24,26 @@ const communitySpaces: CommunitySpaces[] = [
       {
         name: 'Gemeinschaftsraum mit Lesenest',
         description: 'Großer Raum mit Küche und Lesenest für Treffen, Feiern und gemeinsame Aktivitäten.',
-        icon: 'rooms',
         link: '/intern/raumbuchungen/gemeinschaftsraum',
         price: '8 € pro Stunde',
       },
       {
         name: 'Gästeappartement',
         description: 'Unterkunft für bis zu vier Gäste mit Bad, Schlafsofa, Hochbett und WLAN.',
-        icon: 'home',
         link: '/intern/raumbuchungen/gaesteappartement',
         price: '30 € pro Nacht',
       },
       {
         name: 'Werkstatt',
         description: 'Geteilte Fläche für handwerkliche Arbeiten und gemeinschaftliche Projekte.',
-        icon: 'skills',
       },
       {
         name: 'Kulturschuppen',
         description: 'Ort für Kultur, Veranstaltungen und Begegnung innerhalb der Gemeinschaft.',
-        icon: 'people',
       },
       {
         name: 'Fahrradwerkstatt',
         description: 'Gemeinsam genutzte Werkstatt mit Werkzeug für Pflege und Reparatur von Fahrrädern.',
-        icon: 'skills',
       },
     ],
   },
@@ -62,27 +54,22 @@ const communitySpaces: CommunitySpaces[] = [
       {
         name: 'Gemeinschaftsraum',
         description: 'Gemeinsamer Raum für Treffen, Veranstaltungen und Aktivitäten im Haus.',
-        icon: 'rooms',
       },
       {
         name: 'Gästeappartement',
         description: 'Geteilte Unterkunft für den Besuch von Bewohnerinnen und Bewohnern.',
-        icon: 'home',
       },
       {
         name: 'Werkstatt',
         description: 'Gemeinschaftlich ausgestattete Fläche für Reparaturen und eigene Projekte.',
-        icon: 'skills',
       },
       {
         name: 'Dachgärten und Dachterrassen',
         description: 'Gemeinsame Freiflächen über den Häusern für Aufenthalt, Garten und Begegnung.',
-        icon: 'people',
       },
       {
         name: 'Offener Quartiersplatz',
         description: 'Nach Süden geöffneter Platz als Treffpunkt zwischen Haus und Quartier.',
-        icon: 'people',
       },
     ],
   },
@@ -93,85 +80,100 @@ const communitySpaces: CommunitySpaces[] = [
       {
         name: 'Gemeinschaftsraum',
         description: 'Große gemeinschaftlich nutzbare Innenfläche für Treffen und Veranstaltungen.',
-        icon: 'rooms',
       },
       {
         name: 'Gästeappartement',
         description: 'Geteilte Unterkunft für Gäste aus dem persönlichen Umfeld der Bewohner.',
-        icon: 'home',
       },
       {
         name: 'Dachterrasse',
         description: 'Gemeinsame Freifläche mit Blick über das Quartier.',
-        icon: 'people',
       },
       {
         name: 'Gemeinschaftsgarten',
         description: 'Grüne Fläche für gemeinsames Gärtnern, Aufenthalt und nachbarschaftliche Aktivitäten.',
-        icon: 'people',
       },
       {
         name: 'Innenhof und Vorplatz',
         description: 'Offene Begegnungsorte, die das Haus mit dem umliegenden Quartier verbinden.',
-        icon: 'people',
       },
     ],
   },
 ]
 
-function SpaceCard({ space }: { space: SharedSpace }) {
-  const content = (
-    <>
-      <div className="flex items-start justify-between gap-3">
-        <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[16px] ${
-          space.link ? 'bg-[#dceadf] text-[#245747]' : 'bg-[#ebece7] text-[#66736b]'
-        }`}>
-          <AppIcon name={space.icon} className="h-[22px] w-[22px]" />
-        </span>
-        <span className={`rounded-full px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.07em] ${
-          space.link
-            ? 'bg-[#dceadf] text-[#245747]'
-            : 'bg-[#eeeee9] text-[#737c76]'
-        }`}>
-          {space.link ? 'Buchbar' : 'Noch nicht online buchbar'}
-        </span>
-      </div>
+const communityThemes: Record<CommunityId, {
+  panel: string
+  card: string
+  marker: string
+  divider: string
+  action: string
+}> = {
+  'sheridan-junia': {
+    panel: 'border-[#b9cdf6] bg-[#edf3ff]',
+    card: 'border-[#c4d4f3] border-l-[#2563eb] bg-white/80',
+    marker: 'bg-[#2563eb]',
+    divider: 'border-[#d6e1f7]',
+    action: 'bg-[#1a56db] text-white',
+  },
+  wagnisshare: {
+    panel: 'border-[#f0c5ad] bg-[#fff3ea]',
+    card: 'border-[#f0cfba] border-l-[#e4572e] bg-white/80',
+    marker: 'bg-[#e4572e]',
+    divider: 'border-[#f3ded0]',
+    action: 'bg-[#c94c28] text-white',
+  },
+  wogenau: {
+    panel: 'border-[#b9d8bd] bg-[#edf7ee]',
+    card: 'border-[#c7dfca] border-l-[#299447] bg-white/80',
+    marker: 'bg-[#299447]',
+    divider: 'border-[#d8e9da]',
+    action: 'bg-[#247b3b] text-white',
+  },
+}
 
-      <div className="mt-4">
-        <h3 className="mb-2 font-sans text-[18px] font-bold leading-[1.2] tracking-[-0.025em]">
+function SpaceCard({
+  space,
+  theme,
+}: {
+  space: SharedSpace
+  theme: (typeof communityThemes)[CommunityId]
+}) {
+  return (
+    <details className={`group overflow-hidden rounded-[18px] border border-l-4 ${theme.card}`}>
+      <summary className="space-summary flex min-h-[58px] cursor-pointer list-none items-center gap-3 px-3.5 py-3 md:min-h-[60px] md:px-4">
+        <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${theme.marker}`} aria-hidden="true" />
+        <h3 className="mb-0 min-w-0 flex-1 font-sans text-[15px] font-bold leading-[1.25] tracking-[-0.015em] md:text-[16px]">
           {space.name}
         </h3>
+        <AppIcon
+          name="chevron"
+          className="h-[18px] w-[18px] shrink-0 text-[var(--muted)] transition-transform duration-200 group-open:rotate-180"
+        />
+      </summary>
+
+      <div className={`border-t px-4 pb-4 pt-3 ${theme.divider}`}>
         <p className="mb-0 text-[13px] leading-[1.55] text-[var(--muted)]">
           {space.description}
         </p>
+
+        {space.link ? (
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+            <span className="text-[12px] font-bold text-[#31594c]">{space.price}</span>
+            <Link
+              href={space.link}
+              className={`inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-[12px] font-bold shadow-sm transition-transform active:scale-[0.97] ${theme.action}`}
+            >
+              Details & Buchung
+              <AppIcon name="arrow" className="h-4 w-4" />
+            </Link>
+          </div>
+        ) : (
+          <p className="mb-0 mt-3 text-[11px] font-bold uppercase tracking-[0.06em] text-[var(--muted)]">
+            Noch keine Online-Buchung verfügbar
+          </p>
+        )}
       </div>
-
-      {space.link && (
-        <div className="mt-4 flex items-center justify-between border-t border-[var(--line)] pt-4">
-          <span className="text-[11px] font-bold text-[#31594c]">{space.price}</span>
-          <span className="flex items-center gap-1.5 text-[11px] font-bold text-[var(--accent)]">
-            Details & Buchung
-            <AppIcon name="arrow" className="h-4 w-4" />
-          </span>
-        </div>
-      )}
-    </>
-  )
-
-  const className = `block rounded-[26px] border p-4 transition-transform duration-150 md:p-5 ${
-    space.link
-      ? 'border-[#9ebcad]/45 bg-white shadow-[0_14px_34px_rgba(28,64,49,0.07)] active:scale-[0.98]'
-      : 'border-[var(--line)] bg-white/[0.62]'
-  }`
-
-  return space.link ? (
-    <Link href={space.link} className={className}>
-      {content}
-    </Link>
-  ) : (
-    <article className={className}>
-      {content}
-    </article>
+    </details>
   )
 }
 
@@ -210,13 +212,17 @@ export default function GemeinschaftsflaechenPage() {
         </div>
       </section>
 
-      <div className="container-custom mt-9 space-y-10 md:mt-14 md:space-y-16">
+      <div className="container-custom mt-9 space-y-6 md:mt-14 md:space-y-8">
         {communitySpaces.map((community) => {
           const availableCount = community.spaces.filter((space) => Boolean(space.link)).length
+          const theme = communityThemes[community.id]
 
           return (
-            <section key={community.id}>
-              <div className="mb-4 flex items-start justify-between gap-4 md:mb-6">
+            <section
+              key={community.id}
+              className={`rounded-[28px] border p-4 shadow-[0_12px_32px_rgba(28,64,49,0.04)] md:p-6 ${theme.panel}`}
+            >
+              <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
                   <CommunityBadge community={community.id} />
                   <p className="mb-0 mt-2 max-w-[54ch] text-[12px] leading-[1.55] text-[var(--muted)] md:text-[14px]">
@@ -228,9 +234,9 @@ export default function GemeinschaftsflaechenPage() {
                 </span>
               </div>
 
-              <div className="grid gap-3 md:grid-cols-2 md:gap-5 xl:grid-cols-3">
+              <div className="grid gap-2.5 md:grid-cols-2 xl:grid-cols-3">
                 {community.spaces.map((space) => (
-                  <SpaceCard key={space.name} space={space} />
+                  <SpaceCard key={space.name} space={space} theme={theme} />
                 ))}
               </div>
             </section>

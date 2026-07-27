@@ -417,6 +417,14 @@ html[data-display-mode="standalone"] body {
   display: none;
 }
 
+.space-summary::-webkit-details-marker {
+  display: none;
+}
+
+.space-summary::marker {
+  content: "";
+}
+
 @media (max-width: 768px) {
   body {
     background: var(--app-bg);

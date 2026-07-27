@@ -15,6 +15,7 @@ interface AppIconProps {
     | 'plus'
     | 'projects'
     | 'logout'
+    | 'chevron'
   className?: string
 }
 
@@ -100,6 +101,7 @@ const paths: Record<AppIconProps['name'], React.ReactNode> = {
       <path d="M10 5H6.5A1.5 1.5 0 0 0 5 6.5v11A1.5 1.5 0 0 0 6.5 19H10M14 8l4 4-4 4M9 12h9" />
     </>
   ),
+  chevron: <path d="m7 9 5 5 5-5" />,
 }
 
 export default function AppIcon({ name, className = 'h-5 w-5' }: AppIconProps) {
