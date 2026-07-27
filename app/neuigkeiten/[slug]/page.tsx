@@ -34,7 +34,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     <>
       <div className="app-screen md:hidden">
         {post.image_url && (
-          <div className="relative h-[285px] overflow-hidden rounded-b-[34px] bg-[#dce5dd]">
+          <div className="relative h-[285px] overflow-hidden rounded-b-[28px] bg-[#dce5dd]">
             <Image
               src={post.image_url}
               alt={post.title}
@@ -54,17 +54,17 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               {formatDateLong(post.published_at)}
             </span>
           </div>
-          <h1 className="mb-0 font-sans text-[31px] font-bold leading-[1.08] tracking-[-0.045em]">
+          <h1 className="mb-0 font-sans text-[34px] font-bold leading-[1.06] tracking-[-0.045em]">
             {post.title}
           </h1>
         </section>
 
-        <article className="app-article article-copy mt-6 border-t border-[var(--line)] px-4 pt-6">
+        <article className="app-article article-copy mt-6 border-t border-[var(--app-ios-line)] px-4 pt-6">
           <ReactMarkdown>{post.content}</ReactMarkdown>
         </article>
 
-        <div className="mx-4 mt-8 border-t border-[var(--line)] pt-5">
-          <Link href="/neuigkeiten" className="flex min-h-[50px] items-center justify-between rounded-[18px] bg-white/[0.78] px-4 text-[13px] font-bold text-[#245245]">
+        <div className="mx-4 mt-8 border-t border-[var(--app-ios-line)] pt-5">
+          <Link href="/neuigkeiten" className="app-group flex min-h-[50px] items-center justify-between px-4 text-[13px] font-semibold text-[var(--app-ios-accent)]">
             Alle Neuigkeiten
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M5 12h14M14 7l5 5-5 5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

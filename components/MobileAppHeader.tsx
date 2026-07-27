@@ -33,8 +33,8 @@ export default function MobileAppHeader({ isLoggedIn = false }: MobileAppHeaderP
 
   return (
     <header className="app-header md:hidden">
-      <div className="flex h-16 items-center justify-between px-4">
-        <div className="flex min-w-0 items-center gap-3">
+      <div className="grid h-14 grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] items-center gap-2 px-4">
+        <div className="flex items-center justify-start">
           {screen.parent ? (
             <Link
               href={screen.parent}
@@ -52,27 +52,29 @@ export default function MobileAppHeader({ isLoggedIn = false }: MobileAppHeaderP
               <span />
             </Link>
           )}
+        </div>
 
-          <div className="min-w-0">
-            <div className="truncate text-[16px] font-bold leading-[1.05] tracking-[-0.025em] text-[var(--ink)]">
-              {screen.title}
-            </div>
-            <div className="mt-1 truncate text-[10px] font-semibold uppercase leading-none tracking-[0.13em] text-[var(--muted)]">
-              {screen.subtitle}
-            </div>
+        <div className="min-w-0 text-center">
+          <div className="truncate text-[15px] font-semibold leading-[1.1] tracking-[-0.015em] text-[var(--app-ios-ink)]">
+            {screen.title}
+          </div>
+          <div className="mt-0.5 truncate text-[10px] font-medium leading-none text-[var(--app-ios-muted)]">
+            {screen.subtitle}
           </div>
         </div>
 
-        <Link
-          href={isLoggedIn ? '/intern/dashboard' : '/login'}
-          className={`app-header-button relative ${isInternal ? 'bg-[var(--surface-deep)] text-white' : ''}`}
-          aria-label={isLoggedIn ? 'Interner Bereich' : 'Anmelden'}
-        >
-          <AppIcon name={isLoggedIn ? 'people' : 'lock'} className="h-[19px] w-[19px]" />
-          {isLoggedIn && (
-            <span className="absolute right-0.5 top-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#f5f6f1] bg-[#58a870]" />
-          )}
-        </Link>
+        <div className="flex items-center justify-end">
+          <Link
+            href={isLoggedIn ? '/intern/dashboard' : '/login'}
+            className={`app-header-button relative ${isInternal ? '!bg-[var(--app-ios-accent)] !text-white' : ''}`}
+            aria-label={isLoggedIn ? 'Interner Bereich' : 'Anmelden'}
+          >
+            <AppIcon name={isLoggedIn ? 'people' : 'lock'} className="h-[18px] w-[18px]" />
+            {isLoggedIn && !isInternal && (
+              <span className="absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 border-[#f8f8fa] bg-[#34c759]" />
+            )}
+          </Link>
+        </div>
       </div>
     </header>
   )

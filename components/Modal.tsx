@@ -33,24 +33,24 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 overflow-y-auto font-[var(--app-system-font)]">
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black/40 transition-opacity backdrop-blur-sm"
+        className="fixed inset-0 bg-black/30 transition-opacity backdrop-blur-sm"
         onClick={onClose}
       />
 
       {/* Modal */}
       <div className="flex min-h-full items-end justify-center p-0 md:items-center md:p-4">
-        <div className={`relative flex w-full flex-col border border-[#d2d2d7] bg-white shadow-sm ${sizeClasses[size]} rounded-t-[28px] md:rounded-[24px] ${size === 'full' ? 'h-[calc(100vh-1rem)] md:h-[calc(100vh-2rem)]' : 'max-h-[88svh] md:max-h-[calc(100vh-2rem)]'} ${size === 'full' ? 'md:flex-col' : ''}`}>
+        <div className={`relative flex w-full flex-col border border-[var(--app-ios-line)] bg-[#f9f9fb] shadow-[0_24px_80px_rgba(0,0,0,0.18)] ${sizeClasses[size]} rounded-t-[28px] md:rounded-[24px] ${size === 'full' ? 'h-[calc(100vh-1rem)] md:h-[calc(100vh-2rem)]' : 'max-h-[88svh] md:max-h-[calc(100vh-2rem)]'} ${size === 'full' ? 'md:flex-col' : ''}`}>
           {/* Header */}
-          <div className="sticky top-0 z-10 border-b border-[#d2d2d7] bg-white/96 px-4 pb-4 pt-3 backdrop-blur md:px-6 md:py-5">
+          <div className="sticky top-0 z-10 border-b border-[var(--app-ios-line)] bg-[#f9f9fb]/90 px-4 pb-4 pt-3 backdrop-blur-xl md:px-6 md:py-5">
             <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#d2d2d7] md:hidden" />
             <div className="flex items-center justify-between gap-4">
-            <h2 className="mb-0 text-[20px] font-medium text-[#1d1d1f] md:text-[24px]">{title}</h2>
+            <h2 className="mb-0 text-[20px] font-semibold text-[#1d1d1f] md:text-[24px]">{title}</h2>
             <button
               onClick={onClose}
-              className="-mr-2 rounded-full p-2 text-[#6e6e73] transition-colors hover:bg-[rgba(31,77,67,0.06)] hover:text-[#1d1d1f]"
+              className="-mr-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#e5e5ea] text-[#6e6e73] transition-colors hover:text-[#1d1d1f]"
               aria-label="Schließen"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

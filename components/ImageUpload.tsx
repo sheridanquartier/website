@@ -59,7 +59,7 @@ export default function ImageUpload({ onImageSelect, currentImage }: ImageUpload
   return (
     <div className="space-y-3">
       {!preview ? (
-        <div className="rounded-[22px] border border-dashed border-[var(--line)] bg-[rgba(31,77,67,0.03)] p-4 md:p-5">
+        <div className="rounded-[16px] border border-dashed border-[var(--app-ios-line)] bg-white p-4 md:p-5">
           <label className="btn-secondary inline-flex cursor-pointer">
             <input
               type="file"
@@ -74,8 +74,8 @@ export default function ImageUpload({ onImageSelect, currentImage }: ImageUpload
           </p>
         </div>
       ) : (
-        <div className="space-y-3 rounded-[22px] border border-[var(--line)] bg-[rgba(31,77,67,0.03)] p-4 md:p-5">
-          <div className="relative inline-block overflow-hidden rounded-[18px]">
+        <div className="space-y-3 rounded-[16px] border border-[var(--app-ios-line)] bg-white p-4 md:p-5">
+          <div className="relative inline-block overflow-hidden rounded-[14px]">
             <Image
               src={preview}
               alt="Vorschau"

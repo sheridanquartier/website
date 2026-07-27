@@ -14,9 +14,9 @@ export default function QuartierPage() {
   return (
     <>
       <div className="app-screen md:hidden">
-        <section className="px-4 pt-4">
+        <section className="px-4 pt-6">
           <p className="app-kicker">Orientierung</p>
-          <h1 className="mb-2 font-sans text-[30px] font-bold leading-[1.08] tracking-[-0.045em]">
+          <h1 className="mb-2 font-sans text-[34px] font-bold leading-[1.04] tracking-[-0.045em]">
             Alles in der Nähe.
           </h1>
           <p className="mb-0 text-[14px] leading-[1.55] text-[var(--muted)]">
@@ -25,7 +25,7 @@ export default function QuartierPage() {
         </section>
 
         <section className="mt-5 px-4">
-          <div className="relative overflow-hidden rounded-[30px] bg-[#dfe7df] shadow-[0_18px_44px_rgba(28,64,49,0.12)]">
+          <div className="relative overflow-hidden rounded-[22px] bg-[#dfe7df] shadow-[0_3px_14px_rgba(20,24,23,0.08)]">
             <iframe
               src={mapUrl}
               title="Quartierskarte Sheridan Quartier"
@@ -39,7 +39,7 @@ export default function QuartierPage() {
               href={sharedMapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute bottom-4 left-4 right-4 flex min-h-[50px] items-center justify-between rounded-[18px] bg-white px-4 text-[13px] font-bold text-[#214f41] shadow-lg"
+              className="absolute bottom-4 left-4 right-4 flex min-h-[50px] items-center justify-between rounded-[14px] bg-white/92 px-4 text-[13px] font-semibold text-[var(--app-ios-accent)] shadow-sm backdrop-blur-xl"
             >
               In Google Maps öffnen
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -51,17 +51,17 @@ export default function QuartierPage() {
 
         <section className="mt-7 px-4">
           <p className="app-kicker">Kartenlegende</p>
-          <div className="mt-3 overflow-hidden rounded-[24px] bg-white/[0.78]">
+          <div className="app-group mt-3">
             {projectLegend.map((project) => (
-              <div key={project.name} className="flex items-center gap-3 border-b border-[var(--line)] p-4">
+              <div key={project.name} className="app-list-row">
                 <span
-                  className="h-10 w-10 shrink-0 rounded-[14px] border-4 border-white shadow-sm"
+                  className="h-10 w-10 shrink-0 rounded-[12px] border-4 border-white shadow-sm"
                   style={{ backgroundColor: project.color }}
                   aria-hidden="true"
                 />
                 <span>
-                  <span className="block text-[14px] font-bold">{project.name}</span>
-                  <span className="mt-0.5 block text-[11px] text-[var(--muted)]">{project.colorName} markiert</span>
+                  <span className="block text-[14px] font-semibold">{project.name}</span>
+                  <span className="mt-0.5 block text-[11px] text-[var(--app-ios-muted)]">{project.colorName} markiert</span>
                 </span>
               </div>
             ))}
@@ -69,26 +69,26 @@ export default function QuartierPage() {
               ['A', 'Gästeappartements', 'für Besuch im Quartier'],
               ['R', 'Gemeinschaftsräume', 'für Begegnung und Termine'],
             ].map(([mark, title, detail]) => (
-              <div key={title} className="flex items-center gap-3 border-b border-[var(--line)] p-4 last:border-0">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#e3ece5] text-[13px] font-bold text-[#285849]">
+              <div key={title} className="app-list-row">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-[var(--app-ios-accent-soft)] text-[13px] font-semibold text-[var(--app-ios-accent)]">
                   {mark}
                 </span>
                 <span>
-                  <span className="block text-[14px] font-bold">{title}</span>
-                  <span className="mt-0.5 block text-[11px] text-[var(--muted)]">{detail}</span>
+                  <span className="block text-[14px] font-semibold">{title}</span>
+                  <span className="mt-0.5 block text-[11px] text-[var(--app-ios-muted)]">{detail}</span>
                 </span>
               </div>
             ))}
           </div>
 
-          <div className="mt-3 flex items-start gap-3 rounded-[22px] bg-[#e3ece5] p-4">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[#285849]">
+          <div className="mt-3 flex items-start gap-3 rounded-[18px] bg-[var(--app-ios-accent-soft)] p-4">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[var(--app-ios-accent)]">
               <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M12 21s6-4.2 6-10a6 6 0 1 0-12 0c0 5.8 6 10 6 10Z" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 <circle cx="12" cy="11" r="2.3" strokeWidth="1.8" />
               </svg>
             </span>
-            <p className="mb-0 text-[12px] leading-[1.55] text-[#345b4f]">
+            <p className="mb-0 text-[12px] leading-[1.55] text-[var(--app-ios-muted)]">
               Tippe auf einen Pin in der Karte, um weitere Informationen zum jeweiligen Ort zu erhalten.
             </p>
           </div>

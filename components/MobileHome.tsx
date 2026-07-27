@@ -58,15 +58,15 @@ export default function MobileHome({ posts, isLoggedIn }: MobileHomeProps) {
       <section className="px-4 pt-4">
         <div className="mb-4 flex items-end justify-between">
           <div>
-            <p className="mb-1 text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
+            <p className="mb-1 text-[13px] font-medium text-[var(--app-ios-muted)]">
               Willkommen
             </p>
-            <h1 className="mb-0 font-sans text-[29px] font-bold leading-[1.08] tracking-[-0.045em]">
+            <h1 className="mb-0 font-sans text-[32px] font-bold leading-[1.06] tracking-[-0.045em]">
               Schön, dass du da bist.
             </h1>
           </div>
-          <span className="mb-1 inline-flex items-center gap-1.5 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.06em] text-[#547163]">
-            <span className="h-2 w-2 rounded-full bg-[#58a870]" />
+          <span className="mb-1 inline-flex items-center gap-1.5 whitespace-nowrap text-[11px] font-medium text-[var(--app-ios-muted)]">
+            <span className="h-2 w-2 rounded-full bg-[#34c759]" />
             3 Häuser
           </span>
         </div>
@@ -81,7 +81,7 @@ export default function MobileHome({ posts, isLoggedIn }: MobileHomeProps) {
             priority
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,38,31,0.02)_18%,rgba(15,38,31,0.2)_52%,rgba(15,38,31,0.88)_100%)]" />
-          <div className="absolute left-4 top-4 rounded-full border border-white/25 bg-black/20 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-md">
+          <div className="absolute left-4 top-4 rounded-full bg-black/20 px-3 py-1.5 text-[10px] font-medium tracking-[0.04em] text-white backdrop-blur-xl">
             Sheridanpark · Augsburg
           </div>
           <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
@@ -91,7 +91,7 @@ export default function MobileHome({ posts, isLoggedIn }: MobileHomeProps) {
                 Ein Quartier, das verbindet.
               </h2>
             </div>
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#1f4d43] shadow-lg">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/95 text-[var(--app-ios-accent)]">
               <AppIcon name="arrow" className="h-5 w-5" />
             </span>
           </div>
@@ -161,27 +161,27 @@ export default function MobileHome({ posts, isLoggedIn }: MobileHomeProps) {
             </Link>
 
             {morePosts.length > 0 && (
-              <div className="mt-2 overflow-hidden rounded-[24px] bg-white/[0.78]">
+              <div className="app-group mt-2">
                 {morePosts.map((post) => (
                   <Link
                     key={post.id}
                     href={`/neuigkeiten/${post.slug}`}
-                    className="flex items-center gap-3 border-b border-[var(--line)] p-3.5 last:border-0"
+                    className="app-list-row !min-h-[82px] !px-3.5"
                   >
-                    <div className="relative h-[66px] w-[66px] shrink-0 overflow-hidden rounded-[17px] bg-[#e6ebe4]">
+                    <div className="relative h-[58px] w-[58px] shrink-0 overflow-hidden rounded-[14px] bg-[#e5e5ea]">
                       {post.image_url && (
                         <Image src={post.image_url} alt="" fill sizes="66px" className="object-cover" />
                       )}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <div className="mb-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--accent)]">
+                      <div className="mb-1 text-[10px] font-medium text-[var(--app-ios-accent)]">
                         {formatDate(post.published_at)}
                       </div>
-                      <div className="line-clamp-2 text-[14px] font-bold leading-[1.35] tracking-[-0.015em]">
+                      <div className="line-clamp-2 text-[14px] font-semibold leading-[1.35] tracking-[-0.015em]">
                         {post.title}
                       </div>
                     </div>
-                    <svg className="h-4 w-4 shrink-0 text-[#89958e]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <svg className="h-4 w-4 shrink-0 text-[#c7c7cc]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                       <path d="m9 6 6 6-6 6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </Link>
@@ -202,7 +202,7 @@ export default function MobileHome({ posts, isLoggedIn }: MobileHomeProps) {
             <Link
               key={project.name}
               href={project.href}
-              className="relative h-[260px] w-[78vw] max-w-[330px] shrink-0 snap-center overflow-hidden rounded-[28px] bg-[#dce5dd]"
+              className="relative h-[250px] w-[78vw] max-w-[330px] shrink-0 snap-center overflow-hidden rounded-[22px] bg-[#dce5dd] shadow-[0_3px_14px_rgba(20,24,23,0.08)]"
             >
               <Image src={project.image} alt={project.name} fill sizes="78vw" className="object-cover" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(14,34,28,0.85)_100%)]" />
@@ -220,20 +220,20 @@ export default function MobileHome({ posts, isLoggedIn }: MobileHomeProps) {
         </div>
       </section>
 
-      <section className="mx-4 mt-10 overflow-hidden rounded-[30px] bg-[#183f36] px-5 py-6 text-white">
-        <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-[16px] bg-white/10 text-[#f0c998]">
+      <section className="app-group mx-4 mt-10 px-5 py-6">
+        <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-[13px] bg-[var(--app-ios-accent-soft)] text-[var(--app-ios-accent)]">
           <AppIcon name="people" className="h-6 w-6" />
         </div>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#acd0bf]">
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--app-ios-muted)]">
           Für Bewohnerinnen & Bewohner
         </p>
-        <h2 className="mb-3 max-w-[12ch] font-sans text-[27px] font-bold leading-[1.08] tracking-[-0.04em] text-white">
+        <h2 className="mb-3 max-w-[12ch] font-sans text-[27px] font-bold leading-[1.08] tracking-[-0.04em]">
           Organisieren, teilen, füreinander da sein.
         </h2>
-        <p className="mb-5 text-[14px] leading-[1.65] text-white/[0.72]">
+        <p className="mb-5 text-[14px] leading-[1.65] text-[var(--app-ios-muted)]">
           Gemeinschaftsflächen, Termine, Schwarzes Brett, Verleihpool und Skillpool liegen im internen Bereich direkt beieinander.
         </p>
-        <Link href={internalHref} className="flex min-h-[50px] items-center justify-between rounded-[18px] bg-white px-4 text-[14px] font-bold text-[#183f36]">
+        <Link href={internalHref} className="flex min-h-[50px] items-center justify-between rounded-[14px] bg-[var(--app-ios-accent)] px-4 text-[14px] font-semibold text-white">
           <span>{isLoggedIn ? 'Mein Quartier öffnen' : 'Intern anmelden'}</span>
           <AppIcon name="arrow" className="h-5 w-5" />
         </Link>

@@ -20,12 +20,14 @@ interface TabItem {
 function TabContent({ label, icon, active }: Pick<TabItem, 'label' | 'icon'> & { active: boolean }) {
   return (
     <>
-      <span className={`relative flex h-7 w-10 items-center justify-center rounded-full transition-all duration-200 ${
-        active ? 'bg-[#dce9df] text-[#1f5948]' : 'text-[#6f7a73]'
+      <span className={`relative flex h-7 w-10 items-center justify-center transition-all duration-200 ${
+        active ? 'scale-[1.04] text-[var(--app-ios-accent)]' : 'text-[var(--app-ios-tertiary)]'
       }`}>
         <AppIcon name={icon} className="h-[20px] w-[20px]" />
       </span>
-      <span className={`text-[10px] font-semibold leading-none ${active ? 'text-[#1f5948]' : 'text-[#6f7a73]'}`}>
+      <span className={`text-[10px] font-medium leading-none ${
+        active ? 'text-[var(--app-ios-accent)]' : 'text-[var(--app-ios-tertiary)]'
+      }`}>
         {label}
       </span>
     </>
@@ -96,12 +98,12 @@ export default function MobileTabBar({ isLoggedIn = false }: MobileTabBarProps) 
         <div className="md:hidden fixed inset-0 z-[80]">
           <button
             type="button"
-            className="absolute inset-0 bg-[#102b24]/35 backdrop-blur-[2px]"
+            className="absolute inset-0 bg-black/25 backdrop-blur-[2px]"
             onClick={() => setMoreOpen(false)}
             aria-label="Menü schließen"
           />
           <div className="app-sheet">
-            <div className="mx-auto mb-5 h-1.5 w-10 rounded-full bg-[#c8cfca]" />
+            <div className="mx-auto mb-5 h-1.5 w-10 rounded-full bg-[#c7c7cc]" />
             <div className="mb-5 flex items-start justify-between">
               <div>
                 <p className="app-kicker">{isInternal ? 'Interner Bereich' : 'Sheridan Quartier'}</p>
@@ -116,19 +118,19 @@ export default function MobileTabBar({ isLoggedIn = false }: MobileTabBarProps) 
               </button>
             </div>
 
-            <div className="overflow-hidden rounded-[24px] bg-white/80">
+            <div className="app-group">
               {(isInternal ? internalMenu : publicMenu).map((item) => (
-                <Link key={item.href} href={item.href} className="flex items-center gap-3 border-b border-[var(--line)] p-4 last:border-0">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#e4ece6] text-[#285849]">
+                <Link key={item.href} href={item.href} className="app-list-row">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-[var(--app-ios-accent-soft)] text-[var(--app-ios-accent)]">
                     <AppIcon name={item.icon} className="h-5 w-5" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[14px] font-bold tracking-[-0.015em]">{item.title}</span>
+                    <span className="block text-[15px] font-semibold tracking-[-0.015em]">{item.title}</span>
                     {'subtitle' in item && item.subtitle && (
-                      <span className="mt-0.5 block text-[11px] text-[var(--muted)]">{item.subtitle}</span>
+                      <span className="mt-0.5 block text-[12px] text-[var(--app-ios-muted)]">{item.subtitle}</span>
                     )}
                   </span>
-                  <svg className="h-4 w-4 text-[#8a958e]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg className="h-4 w-4 text-[#c7c7cc]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="m9 6 6 6-6 6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </Link>
@@ -137,7 +139,7 @@ export default function MobileTabBar({ isLoggedIn = false }: MobileTabBarProps) 
 
             {isInternal && (
               <form action="/api/auth/logout" method="POST" className="mt-4">
-                <button type="submit" className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[18px] bg-[#efe4dc] text-[13px] font-bold text-[#914b33]">
+                <button type="submit" className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[14px] bg-[#ff3b30]/10 text-[14px] font-semibold text-[#d72c22]">
                   <AppIcon name="logout" className="h-[18px] w-[18px]" />
                   Abmelden
                 </button>
@@ -171,7 +173,12 @@ export default function MobileTabBar({ isLoggedIn = false }: MobileTabBarProps) 
             }
 
             return (
-              <Link key={tab.label} href={tab.href || '/'} className="app-tab">
+              <Link
+                key={tab.label}
+                href={tab.href || '/'}
+                className="app-tab"
+                aria-current={active ? 'page' : undefined}
+              >
                 <TabContent label={tab.label} icon={tab.icon} active={active} />
               </Link>
             )

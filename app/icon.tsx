@@ -15,73 +15,46 @@ export default function Icon() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          padding: '56px',
-          background:
-            'linear-gradient(180deg, #f8f3ea 0%, #edf3ec 54%, #dde8dc 100%)',
-          color: '#1f4d43',
-          borderRadius: '120px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'linear-gradient(145deg, #1d755b 0%, #0f4939 100%)',
         }}
       >
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
+            alignItems: 'flex-end',
+            gap: 24,
+            height: 230,
           }}
         >
           <div
             style={{
-              fontSize: 42,
-              fontWeight: 700,
-              letterSpacing: -1.5,
-            }}
-          >
-            Sheridan
-          </div>
-          <div
-            style={{
-              width: 92,
-              height: 92,
-              borderRadius: 9999,
-              background: '#c56842',
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fffaf4',
-              fontSize: 34,
-              fontWeight: 700,
+              width: 82,
+              height: 142,
+              borderRadius: '18px 18px 8px 8px',
+              background: 'rgba(255,255,255,0.92)',
             }}
-          >
-            SQ
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div
-            style={{
-              fontSize: 68,
-              fontWeight: 700,
-              lineHeight: 1,
-              letterSpacing: -3,
-              maxWidth: '78%',
-            }}
-          >
-            Quartier
-          </div>
+          />
           <div
             style={{
               display: 'flex',
-              gap: 12,
-              fontSize: 22,
-              color: '#627067',
+              width: 82,
+              height: 230,
+              borderRadius: '18px 18px 8px 8px',
+              background: '#ffffff',
             }}
-          >
-            <span>Nachbarschaft</span>
-            <span>Kalender</span>
-            <span>Brett</span>
-          </div>
+          />
+          <div
+            style={{
+              display: 'flex',
+              width: 82,
+              height: 184,
+              borderRadius: '18px 18px 8px 8px',
+              background: 'rgba(255,255,255,0.92)',
+            }}
+          />
         </div>
       </div>
     ),

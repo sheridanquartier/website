@@ -77,10 +77,10 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
     <div className="space-y-5">
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center justify-between gap-3 rounded-[22px] border border-[var(--line)] bg-white/80 px-3 py-2 sm:justify-start">
+        <div className="flex items-center justify-between gap-3 rounded-[16px] bg-[#f2f2f7] px-2 py-1 sm:justify-start">
           <button
             onClick={() => setCurrentDate(subMonths(currentDate, 1))}
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-[var(--ink)] transition-colors hover:bg-[rgba(31,77,67,0.06)]"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-[var(--app-ios-accent)] transition-colors hover:bg-white"
             aria-label="Vorheriger Monat"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,13 +88,13 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
             </svg>
           </button>
 
-          <h2 className="mb-0 text-[20px] font-semibold sm:text-[28px]">
+          <h2 className="mb-0 text-[19px] font-semibold sm:text-[26px]">
             {format(currentDate, 'MMMM yyyy', { locale: de })}
           </h2>
 
           <button
             onClick={() => setCurrentDate(addMonths(currentDate, 1))}
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-[var(--ink)] transition-colors hover:bg-[rgba(31,77,67,0.06)]"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-[var(--app-ios-accent)] transition-colors hover:bg-white"
             aria-label="Nächster Monat"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,23 +104,23 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
         </div>
 
         {/* View Toggle */}
-        <div className="flex gap-2 rounded-[20px] border border-[var(--line)] bg-white/72 p-1 w-full sm:w-auto">
+        <div className="flex w-full gap-1 rounded-[10px] bg-[#e5e5ea] p-0.5 sm:w-auto">
           <button
             onClick={() => setViewMode('list')}
-            className={`min-h-[44px] flex-1 rounded-[16px] px-4 py-2 text-[14px] font-medium transition-colors sm:flex-none ${
+            className={`min-h-[38px] flex-1 rounded-[8px] px-4 py-2 text-[13px] font-medium transition-colors sm:flex-none ${
               viewMode === 'list'
-                ? 'bg-[var(--surface-deep)] text-white'
-                : 'text-[var(--ink)] hover:bg-[rgba(31,77,67,0.06)]'
+                ? 'bg-white text-[var(--app-ios-ink)] shadow-sm'
+                : 'text-[var(--app-ios-muted)]'
             }`}
           >
             Liste
           </button>
           <button
             onClick={() => setViewMode('month')}
-            className={`min-h-[44px] flex-1 rounded-[16px] px-4 py-2 text-[14px] font-medium transition-colors sm:flex-none ${
+            className={`min-h-[38px] flex-1 rounded-[8px] px-4 py-2 text-[13px] font-medium transition-colors sm:flex-none ${
               viewMode === 'month'
-                ? 'bg-[var(--surface-deep)] text-white'
-                : 'text-[var(--ink)] hover:bg-[rgba(31,77,67,0.06)]'
+                ? 'bg-white text-[var(--app-ios-ink)] shadow-sm'
+                : 'text-[var(--app-ios-muted)]'
             }`}
           >
             Monat
@@ -142,7 +142,7 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
 
               return (
                 <div key={dateKey}>
-                  <h3 className="mb-3 text-[17px] font-semibold text-[var(--surface-deep)] md:text-lg">
+                  <h3 className="mb-3 text-[17px] font-semibold text-[var(--app-ios-ink)] md:text-lg">
                     {format(date, 'EEEE, d. MMMM yyyy', { locale: de })}
                   </h3>
                   <div className="space-y-3">
@@ -168,9 +168,9 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
 
       {/* Monatsansicht */}
       {viewMode === 'month' && (
-        <div className="overflow-hidden rounded-[24px] border border-[var(--line)] bg-white shadow-[0_18px_40px_rgba(38,82,62,0.06)]">
+        <div className="overflow-hidden rounded-[20px] border border-[var(--app-ios-line)] bg-white shadow-[0_1px_2px_rgba(15,23,20,0.04)]">
           {/* Wochentage Header */}
-          <div className="grid grid-cols-7 border-b bg-[rgba(31,77,67,0.05)]">
+          <div className="grid grid-cols-7 border-b border-[var(--app-ios-line)] bg-[#f2f2f7]">
             {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(day => (
               <div key={day} className="py-2 text-center text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--muted)] sm:text-sm">
                 {day}
@@ -191,7 +191,7 @@ export default function CalendarView({ events, viewMode: initialViewMode = 'list
                     key={dayIdx}
                     className={`min-h-[86px] border-r p-1.5 last:border-r-0 sm:min-h-[100px] sm:p-2 ${
                       !isCurrentMonth ? 'bg-[rgba(31,77,67,0.03)]' : ''
-                    } ${isToday ? 'bg-[rgba(197,104,66,0.08)]' : ''}`}
+                    } ${isToday ? 'bg-[var(--app-ios-accent-soft)]' : ''}`}
                   >
                     <div className={`mb-1 text-sm font-semibold ${!isCurrentMonth ? 'text-gray-400' : ''}`}>
                       {format(day, dateFormat)}

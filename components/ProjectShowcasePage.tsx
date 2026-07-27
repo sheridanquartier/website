@@ -57,7 +57,7 @@ export default function ProjectShowcasePage({
   return (
     <>
       <div className="app-screen md:hidden">
-        <section className="relative h-[430px] overflow-hidden rounded-b-[36px] bg-[#dce5dd]">
+        <section className="relative h-[420px] overflow-hidden rounded-b-[28px] bg-[#dce5dd]">
           <Image
             src={heroImage.src}
             alt={heroImage.alt}
@@ -67,7 +67,7 @@ export default function ProjectShowcasePage({
             priority
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,33,27,0.05)_20%,rgba(12,33,27,0.24)_52%,rgba(12,33,27,0.9)_100%)]" />
-          <div className="absolute left-4 top-4 rounded-full border border-white/25 bg-black/20 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-white backdrop-blur-md">
+          <div className="absolute left-4 top-4 rounded-full bg-black/20 px-3 py-1.5 text-[10px] font-medium tracking-[0.04em] text-white backdrop-blur-xl">
             {eyebrow}
           </div>
           <div className="absolute inset-x-0 bottom-0 p-5 text-white">
@@ -101,15 +101,15 @@ export default function ProjectShowcasePage({
 
         <section className="mt-7 px-4">
           <p className="app-kicker">Was das Projekt prägt</p>
-          <div className="mt-3 overflow-hidden rounded-[26px] bg-white/[0.78]">
+          <div className="app-group mt-3">
             {highlights.map((item, index) => (
-              <div key={item.label} className="flex gap-4 border-b border-[var(--line)] p-4 last:border-0">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[13px] bg-[#e3ece5] text-[12px] font-bold text-[#285849]">
+              <div key={item.label} className="app-list-row !items-start !py-4">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[11px] bg-[var(--app-ios-accent-soft)] text-[12px] font-semibold text-[var(--app-ios-accent)]">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div>
-                  <div className="text-[13px] font-bold">{item.label}</div>
-                  <p className="mb-0 mt-1 text-[12px] leading-[1.55] text-[var(--muted)]">{item.text}</p>
+                  <div className="text-[14px] font-semibold">{item.label}</div>
+                  <p className="mb-0 mt-1 text-[12px] leading-[1.55] text-[var(--app-ios-muted)]">{item.text}</p>
                 </div>
               </div>
             ))}
@@ -118,11 +118,11 @@ export default function ProjectShowcasePage({
 
         <section className="mt-8 px-4">
           <p className="app-kicker">Steckbrief</p>
-          <div className="mt-3 rounded-[26px] bg-[#183f36] px-5 py-2 text-white">
+          <div className="app-group mt-3 px-5 py-1">
             {facts.map((fact) => (
-              <div key={fact.label} className="border-b border-white/10 py-4 last:border-0">
-                <div className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#a9cdbd]">{fact.label}</div>
-                <div className="mt-1.5 text-[14px] font-semibold leading-[1.5]">{fact.value}</div>
+              <div key={fact.label} className="border-b border-[var(--app-ios-line)] py-4 last:border-0">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.07em] text-[var(--app-ios-muted)]">{fact.label}</div>
+                <div className="mt-1.5 text-[14px] font-medium leading-[1.5]">{fact.value}</div>
               </div>
             ))}
           </div>
@@ -130,7 +130,7 @@ export default function ProjectShowcasePage({
             href={website.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 flex min-h-[52px] items-center justify-between rounded-[18px] bg-white/[0.78] px-4 text-[13px] font-bold text-[#245245]"
+            className="app-group mt-3 flex min-h-[52px] items-center justify-between px-4 text-[13px] font-semibold text-[var(--app-ios-accent)]"
           >
             {website.label}
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -140,11 +140,11 @@ export default function ProjectShowcasePage({
         </section>
 
         {cta && (
-          <section className="mx-4 mt-7 rounded-[28px] bg-[#eee2d5] p-5">
+          <section className="app-group mx-4 mt-7 p-5">
             <p className="app-kicker">Zusatzangebot</p>
             <h2 className="mb-2 font-sans text-[24px] font-bold leading-[1.1] tracking-[-0.035em]">{cta.title}</h2>
             <p className="mb-4 text-[13px] leading-[1.6] text-[var(--muted)]">{cta.text}</p>
-            <Link href={cta.href} target="_blank" rel="noopener noreferrer" className="flex min-h-[50px] items-center justify-between rounded-[18px] bg-[#183f36] px-4 text-[13px] font-bold text-white">
+            <Link href={cta.href} target="_blank" rel="noopener noreferrer" className="flex min-h-[50px] items-center justify-between rounded-[14px] bg-[var(--app-ios-accent)] px-4 text-[13px] font-semibold text-white">
               {cta.label}
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M5 12h14M14 7l5 5-5 5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -161,7 +161,7 @@ export default function ProjectShowcasePage({
             </div>
             <div className="scrollbar-none mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2">
               {gallery.map((image) => (
-                <div key={image.src} className="relative h-[260px] w-[82vw] max-w-[340px] shrink-0 snap-center overflow-hidden rounded-[28px] bg-[#dce5dd]">
+                <div key={image.src} className="relative h-[250px] w-[82vw] max-w-[340px] shrink-0 snap-center overflow-hidden rounded-[22px] bg-[#dce5dd] shadow-[0_3px_14px_rgba(20,24,23,0.08)]">
                   <Image src={image.src} alt={image.alt} fill sizes="82vw" className="object-cover" />
                 </div>
               ))}

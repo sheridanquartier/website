@@ -30,7 +30,7 @@ export default function LendItemCard({
   contact
 }: LendItemCardProps) {
   return (
-    <div className="overflow-hidden rounded-[28px] border border-[var(--line)] bg-[linear-gradient(180deg,rgba(251,248,241,0.98)_0%,rgba(247,241,232,0.94)_100%)] p-0 shadow-[0_18px_42px_rgba(38,82,62,0.08)]">
+    <div className="overflow-hidden rounded-[22px] border border-[var(--app-ios-line)] bg-white p-0 shadow-[0_1px_2px_rgba(15,23,20,0.04)]">
       {imageUrl && (
         <div className="relative h-[170px] w-full bg-[#f5f5f7] md:h-[180px]">
           <Image
@@ -41,7 +41,7 @@ export default function LendItemCard({
           />
         </div>
       )}
-      <div className="p-5 md:p-6">
+      <div className="p-4 md:p-6">
         <div className="mb-3 flex items-start justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <CommunityBadge community={community} size="sm" />
@@ -49,7 +49,7 @@ export default function LendItemCard({
               {categoryLabels[category]}
             </span>
           </div>
-          <div className="flex items-center gap-2 rounded-full bg-[rgba(31,77,67,0.05)] px-3 py-1.5">
+          <div className="flex items-center gap-2 rounded-full bg-[#f2f2f7] px-3 py-1.5">
             <div className={`h-2 w-2 rounded-full ${available ? 'bg-[#34c759]' : 'bg-[#8e8e93]'}`} />
             <span className="text-[12px] font-medium text-[#6e6e73]">
               {available ? 'Verfügbar' : 'Vergeben'}
@@ -57,7 +57,7 @@ export default function LendItemCard({
           </div>
         </div>
 
-        <h3 className="mb-2 text-[21px] font-medium leading-[1.25] text-[#1d1d1f] md:text-[22px]">{name}</h3>
+        <h3 className="mb-2 text-[20px] font-semibold leading-[1.25] text-[#1d1d1f] md:text-[22px]">{name}</h3>
 
         {description && (
           <p className="mb-4 text-[15px] leading-[1.65] text-[#6e6e73] md:text-[16px] line-clamp-3">
@@ -66,7 +66,7 @@ export default function LendItemCard({
         )}
 
         {contact && available && (
-          <div className="mt-4 border-t border-[#d2d2d7] pt-4">
+          <div className="mt-4 border-t border-[var(--app-ios-line)] pt-4">
             <p className="mb-0 text-[14px] text-[#1d1d1f]">
               <span className="font-medium">Kontakt:</span> {contact}
             </p>

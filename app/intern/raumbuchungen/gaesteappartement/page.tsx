@@ -3,12 +3,12 @@ import Image from 'next/image'
 
 export default function GaesteappartementPage() {
   return (
-    <div className="pt-28 min-h-screen">
-      <section className="section bg-white">
+    <div className="min-h-screen pb-24 pt-[calc(4.5rem+env(safe-area-inset-top))] md:pt-28">
+      <section className="py-4 md:bg-white md:py-24">
         <div className="container-custom max-w-4xl">
           <Link
             href="/intern/raumbuchungen"
-            className="inline-flex items-center text-[#0071e3] hover:text-[#0077ed] text-[14px] mb-8"
+            className="mb-8 hidden items-center text-[14px] text-[var(--app-ios-accent)] hover:text-[#125c46] md:inline-flex"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
@@ -16,54 +16,53 @@ export default function GaesteappartementPage() {
             Zurück zu Gemeinschaftsflächen
           </Link>
 
-          <h1 className="mb-8">Gästeappartement Sheridan Park & Junia</h1>
+          <h1 className="mb-8 hidden md:block">Gästeappartement Sheridan Park & Junia</h1>
 
           {/* Hero-Bild */}
-          <div className="relative w-full h-[500px] rounded-2xl overflow-hidden bg-[#f5f5f7] mb-6">
+          <div className="relative mb-3 h-[300px] w-full overflow-hidden rounded-[22px] bg-[#e5e5ea] md:mb-6 md:h-[500px]">
             <Image
               src="/images/SheridanParkUndJunia/IMG_9667_hero.jpg"
               alt="Gästeappartement innen"
               fill
-              className="object-contain"
+              className="object-cover"
             />
           </div>
 
           {/* Impressionen */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="relative w-full h-[200px] rounded-2xl overflow-hidden bg-[#f5f5f7]">
+          <div className="mb-10 grid grid-cols-3 gap-2 md:mb-12 md:gap-6">
+            <div className="relative h-[104px] w-full overflow-hidden rounded-[14px] bg-[#e5e5ea] md:h-[200px] md:rounded-2xl">
               <Image
                 src="/images/SheridanParkUndJunia/IMG_9665_gallery.jpg"
                 alt="Gästeappartement Bad"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
-            <div className="relative w-full h-[200px] rounded-2xl overflow-hidden bg-[#f5f5f7]">
+            <div className="relative h-[104px] w-full overflow-hidden rounded-[14px] bg-[#e5e5ea] md:h-[200px] md:rounded-2xl">
               <Image
                 src="/images/SheridanParkUndJunia/IMG_8499_gallery.jpg"
                 alt="Gästeappartement von Außen mit Garten"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
-            <div className="relative w-full h-[200px] rounded-2xl overflow-hidden bg-[#f5f5f7]">
+            <div className="relative h-[104px] w-full overflow-hidden rounded-[14px] bg-[#e5e5ea] md:h-[200px] md:rounded-2xl">
               <Image
                 src="/images/SheridanParkUndJunia/IMG_9669_gallery.jpg"
                 alt="Gästeappartement Garten"
                 fill
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </div>
 
           {/* Google Calendar Embed */}
           <div className="mb-12">
-            <h2 className="text-[28px] font-medium mb-4 text-[#1d1d1f]">Verfügbarkeit</h2>
+            <h2 className="mb-4 text-[25px] font-semibold text-[#1d1d1f] md:text-[28px]">Verfügbarkeit</h2>
             <div className="card p-0 overflow-hidden">
               <iframe
                 src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FBerlin&showPrint=0&showTitle=0&showTabs=0&showCalendars=0&showTz=0&src=262d2e4f6258cf93aa80728074815d5447da2d3a22e39f6fb869c7596d1c8e0a%40group.calendar.google.com&color=%23f09300"
-                className="w-full h-[600px]"
-                style={{ border: 'solid 1px #777' }}
+                className="h-[520px] w-full border-0 md:h-[600px]"
                 frameBorder="0"
                 scrolling="no"
               ></iframe>
@@ -72,22 +71,22 @@ export default function GaesteappartementPage() {
 
           {/* Buchungsablauf */}
           <div className="mb-12">
-            <h2 className="text-[28px] font-medium mb-6 text-[#1d1d1f]">Buchungsablauf</h2>
+            <h2 className="mb-6 text-[25px] font-semibold text-[#1d1d1f] md:text-[28px]">Buchungsablauf</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="card">
-                <div className="text-[48px] font-semibold text-[#0071e3] mb-3">1.</div>
+                <div className="mb-3 text-[42px] font-semibold text-[var(--app-ios-accent)] md:text-[48px]">1.</div>
                 <p className="text-[17px] text-[#1d1d1f]">
                   Prüfe im Kalender, ob die gewünschten Tage frei sind
                 </p>
               </div>
               <div className="card">
-                <div className="text-[48px] font-semibold text-[#0071e3] mb-3">2.</div>
+                <div className="mb-3 text-[42px] font-semibold text-[var(--app-ios-accent)] md:text-[48px]">2.</div>
                 <p className="text-[17px] text-[#1d1d1f]">
                   Sende eine E-Mail mit deinem Buchungswunsch
                 </p>
               </div>
               <div className="card">
-                <div className="text-[48px] font-semibold text-[#0071e3] mb-3">3.</div>
+                <div className="mb-3 text-[42px] font-semibold text-[var(--app-ios-accent)] md:text-[48px]">3.</div>
                 <p className="text-[17px] text-[#1d1d1f]">
                   Warte auf die Bestätigung per E-Mail
                 </p>

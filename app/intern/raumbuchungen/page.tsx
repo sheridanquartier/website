@@ -185,11 +185,11 @@ export default function GemeinschaftsflaechenPage() {
   )
 
   return (
-    <div className="min-h-screen pb-24 pt-[calc(4.5rem+env(safe-area-inset-top))] md:pt-28">
-      <section className="container-custom pt-4 md:pt-12">
+    <div className="app-screen md:min-h-screen md:pb-24 md:pt-28">
+      <section className="container-custom pt-6 md:pt-12">
         <div className="max-w-[760px]">
-          <p className="app-kicker">Gemeinsam nutzen</p>
-          <h1 className="mb-3 max-w-[13ch] font-sans text-[30px] font-bold leading-[1.07] tracking-[-0.045em] md:text-[48px]">
+          <p className="app-kicker">Übersicht</p>
+          <h1 className="mb-3 max-w-[13ch] font-sans text-[34px] font-bold leading-[1.04] tracking-[-0.045em] md:text-[48px]">
             Räume und Flächen, die wir teilen.
           </h1>
           <p className="mb-0 max-w-[58ch] text-[14px] leading-[1.65] text-[var(--muted)] md:text-[17px]">
@@ -198,15 +198,15 @@ export default function GemeinschaftsflaechenPage() {
           </p>
         </div>
 
-        <div className="mt-6 grid grid-cols-3 divide-x divide-[var(--line)] rounded-[24px] bg-white/[0.78] py-4 shadow-[0_12px_30px_rgba(28,64,49,0.05)] md:max-w-[520px]">
+        <div className="app-group mt-6 grid grid-cols-3 divide-x divide-[var(--app-ios-line)] py-4 md:max-w-[520px]">
           {[
             [communitySpaces.length, 'Projekte'],
             [totalSpaces, 'Flächen'],
             [bookableSpaces, 'buchbar'],
           ].map(([value, label]) => (
             <div key={label} className="text-center">
-              <div className="text-[22px] font-bold leading-none tracking-[-0.04em] text-[#245245]">{value}</div>
-              <div className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.07em] text-[var(--muted)]">{label}</div>
+              <div className="text-[22px] font-semibold leading-none tracking-[-0.04em] text-[var(--app-ios-ink)]">{value}</div>
+              <div className="mt-1.5 text-[10px] font-medium text-[var(--app-ios-muted)]">{label}</div>
             </div>
           ))}
         </div>
@@ -220,7 +220,7 @@ export default function GemeinschaftsflaechenPage() {
           return (
             <section
               key={community.id}
-              className={`rounded-[28px] border p-4 shadow-[0_12px_32px_rgba(28,64,49,0.04)] md:p-6 ${theme.panel}`}
+              className={`rounded-[24px] border p-4 md:p-6 ${theme.panel}`}
             >
               <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
@@ -245,8 +245,8 @@ export default function GemeinschaftsflaechenPage() {
       </div>
 
       <section className="container-custom mt-10 md:mt-16">
-        <div className="flex items-start gap-3 rounded-[24px] bg-[#ebe6d8] p-4 md:max-w-[760px] md:p-5">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-white/[0.72] text-[#6e633e]">
+        <div className="app-group flex items-start gap-3 p-4 md:max-w-[760px] md:p-5">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[12px] bg-[var(--app-ios-accent-soft)] text-[var(--app-ios-accent)]">
             <AppIcon name="people" className="h-5 w-5" />
           </span>
           <div>

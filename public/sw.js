@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sheridan-quartier-v2'
+const CACHE_NAME = 'sheridan-quartier-v3'
 const PUBLIC_FALLBACKS = ['/', '/quartier', '/neuigkeiten', '/login']
 
 self.addEventListener('install', (event) => {

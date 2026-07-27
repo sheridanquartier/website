@@ -115,13 +115,13 @@ export default function PwaClient() {
 
   return (
     <div className="md:hidden fixed left-4 right-4 z-[75] bottom-[calc(5.6rem+env(safe-area-inset-bottom))]">
-      <div className="rounded-[24px] border border-white/50 bg-[rgba(251,251,247,0.96)] px-4 py-4 shadow-[0_20px_48px_rgba(22,57,47,0.2)] backdrop-blur-[20px]">
+      <div className="rounded-[20px] border border-[var(--app-ios-line)] bg-white/90 px-4 py-4 font-[var(--app-system-font)] shadow-[0_12px_40px_rgba(0,0,0,0.16)] backdrop-blur-[24px]">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="mb-1 text-[15px] font-semibold leading-[1.25] text-[var(--ink)]">
+            <p className="mb-1 text-[15px] font-semibold leading-[1.25] text-[var(--app-ios-ink)]">
               Quartier-App auf den Startbildschirm legen
             </p>
-            <p className="mb-0 text-[13px] leading-[1.45] text-[var(--muted)]">
+            <p className="mb-0 text-[13px] leading-[1.45] text-[var(--app-ios-muted)]">
               {installVisible
                 ? 'Dann wirkt die Seite auf dem Handy wie eine eigene App.'
                 : 'Auf dem iPhone: Teilen antippen und dann "Zum Home-Bildschirm".'}
@@ -132,7 +132,7 @@ export default function PwaClient() {
             onClick={() => {
               dismissHint()
             }}
-            className="shrink-0 rounded-full p-2 text-[var(--muted)]"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e5e5ea] text-[var(--app-ios-muted)]"
             aria-label="Hinweis schließen"
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
